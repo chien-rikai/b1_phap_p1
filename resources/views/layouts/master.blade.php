@@ -19,6 +19,10 @@
     <link rel="stylesheet" href="{{ asset('admin/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
     <!-- JQVMap -->
     <link rel="stylesheet" href="{{ asset('admin/plugins/jqvmap/jqvmap.min.css') }}">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="{{ asset('admin/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('admin/dist/css/adminlte.min.css') }}">
     <!-- overlayScrollbars -->
@@ -47,7 +51,9 @@
         @include('layouts.sidebar')
 
         <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper" style="min-height: 1170.12px;">
             @yield('content')
+        </div>
         <!-- /.content-wrapper -->
         @include('layouts.footer')
 
@@ -60,9 +66,9 @@
     <!-- ./wrapper -->
 
     <!-- jQuery -->
-    <script src="plugins/jquery/jquery.min.js"></script>
+    <script src="{{ asset('admin/plugins/jquery/jquery.min.js') }}"></script>
     <!-- jQuery UI 1.11.4 -->
-    <script src="plugins/jquery-ui/jquery-ui.min.js"></script>
+    <script src="{{ asset('admin/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
         $.widget.bridge('uibutton', $.ui.button)
