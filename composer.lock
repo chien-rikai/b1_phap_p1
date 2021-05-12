@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4a16c3c541bd99241cab1c21ce8e83ac",
+    "content-hash": "d761b5203d5386f19188a9dd927cda18",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -857,17 +857,91 @@
             "time": "2021-04-26T09:17:50+00:00"
         },
         {
-            "name": "laravel/framework",
-            "version": "v8.40.0",
+            "name": "intervention/image",
+            "version": "2.5.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/laravel/framework.git",
-                "reference": "a654897ad7f97aea9d7ef292803939798c4a02a4"
+                "url": "https://github.com/Intervention/image.git",
+                "reference": "abbf18d5ab8367f96b3205ca3c89fb2fa598c69e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/a654897ad7f97aea9d7ef292803939798c4a02a4",
-                "reference": "a654897ad7f97aea9d7ef292803939798c4a02a4",
+                "url": "https://api.github.com/repos/Intervention/image/zipball/abbf18d5ab8367f96b3205ca3c89fb2fa598c69e",
+                "reference": "abbf18d5ab8367f96b3205ca3c89fb2fa598c69e",
+                "shasum": ""
+            },
+            "require": {
+                "ext-fileinfo": "*",
+                "guzzlehttp/psr7": "~1.1",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "~0.9.2",
+                "phpunit/phpunit": "^4.8 || ^5.7"
+            },
+            "suggest": {
+                "ext-gd": "to use GD library based image processing.",
+                "ext-imagick": "to use Imagick based image processing.",
+                "intervention/imagecache": "Caching extension for the Intervention Image library"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.4-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Intervention\\Image\\ImageServiceProvider"
+                    ],
+                    "aliases": {
+                        "Image": "Intervention\\Image\\Facades\\Image"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Intervention\\Image\\": "src/Intervention/Image"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Oliver Vogel",
+                    "email": "oliver@olivervogel.com",
+                    "homepage": "http://olivervogel.com/"
+                }
+            ],
+            "description": "Image handling and manipulation library with support for Laravel integration",
+            "homepage": "http://image.intervention.io/",
+            "keywords": [
+                "gd",
+                "image",
+                "imagick",
+                "laravel",
+                "thumbnail",
+                "watermark"
+            ],
+            "support": {
+                "issues": "https://github.com/Intervention/image/issues",
+                "source": "https://github.com/Intervention/image/tree/master"
+            },
+            "time": "2019-11-02T09:15:47+00:00"
+        },
+        {
+            "name": "laravel/framework",
+            "version": "v8.41.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/framework.git",
+                "reference": "05417155d886df8710e55c84e12622b52d83c47c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/05417155d886df8710e55c84e12622b52d83c47c",
+                "reference": "05417155d886df8710e55c84e12622b52d83c47c",
                 "shasum": ""
             },
             "require": {
@@ -975,7 +1049,7 @@
                 "phpunit/phpunit": "Required to use assertions and run tests (^8.5.8|^9.3.3).",
                 "predis/predis": "Required to use the predis connector (^1.1.2).",
                 "psr/http-message": "Required to allow Storage::put to accept a StreamInterface (^1.0).",
-                "pusher/pusher-php-server": "Required to use the Pusher broadcast driver (^4.0|^5.0).",
+                "pusher/pusher-php-server": "Required to use the Pusher broadcast driver (^4.0|^5.0|^6.0).",
                 "symfony/cache": "Required to PSR-6 cache bridge (^5.1.4).",
                 "symfony/filesystem": "Required to enable support for relative symbolic links (^5.1.4).",
                 "symfony/psr-http-message-bridge": "Required to use PSR-7 bridging features (^2.0).",
@@ -1022,7 +1096,7 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2021-04-28T14:38:56+00:00"
+            "time": "2021-05-11T14:00:02+00:00"
         },
         {
             "name": "laravel/tinker",
@@ -1442,16 +1516,16 @@
         },
         {
             "name": "nesbot/carbon",
-            "version": "2.47.0",
+            "version": "2.48.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "606262fd8888b75317ba9461825a24fc34001e1e"
+                "reference": "d3c447f21072766cddec3522f9468a5849a76147"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/606262fd8888b75317ba9461825a24fc34001e1e",
-                "reference": "606262fd8888b75317ba9461825a24fc34001e1e",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/d3c447f21072766cddec3522f9468a5849a76147",
+                "reference": "d3c447f21072766cddec3522f9468a5849a76147",
                 "shasum": ""
             },
             "require": {
@@ -1531,7 +1605,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-04-13T21:54:02+00:00"
+            "time": "2021-05-07T10:08:30+00:00"
         },
         {
             "name": "nikic/php-parser",
@@ -5280,16 +5354,16 @@
         },
         {
             "name": "laravel/sail",
-            "version": "v1.5.0",
+            "version": "v1.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/sail.git",
-                "reference": "7f2d520f8c7d6fc0e5e4949c1363f6ddff0ff116"
+                "reference": "695f616c228c9df923a10282e4989feeae212c52"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sail/zipball/7f2d520f8c7d6fc0e5e4949c1363f6ddff0ff116",
-                "reference": "7f2d520f8c7d6fc0e5e4949c1363f6ddff0ff116",
+                "url": "https://api.github.com/repos/laravel/sail/zipball/695f616c228c9df923a10282e4989feeae212c52",
+                "reference": "695f616c228c9df923a10282e4989feeae212c52",
                 "shasum": ""
             },
             "require": {
@@ -5336,7 +5410,7 @@
                 "issues": "https://github.com/laravel/sail/issues",
                 "source": "https://github.com/laravel/sail"
             },
-            "time": "2021-04-20T16:17:55+00:00"
+            "time": "2021-05-11T21:00:37+00:00"
         },
         {
             "name": "mockery/mockery",

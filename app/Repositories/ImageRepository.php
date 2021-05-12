@@ -4,8 +4,7 @@ namespace App\Repositories;
 
 use Image;
 use Session;
-use File;
-use Auth;
+use Storage;
 
 /**
  *
@@ -29,6 +28,11 @@ class ImageRepository
     {
         $filename_ = $filename . '.' . $img->getClientOriginalExtension();
         $path = storage_path('app/public/' . $url . '/' . $filename_);
+
+        if (empty(Storage::directories($url))) {
+            Storage::makeDirectory($url);
+        }
+
         //Create image size and save image local
         try {
             switch ($status):
