@@ -1,10 +1,14 @@
 @extends('layouts.master')
 
 @section('title')
+<<<<<<< HEAD
     {{ __('common.title', [
         'model' => __('common.category'),
         'module' => __('common.index')
     ]) }}
+=======
+Quản lý danh mục | Danh sách
+>>>>>>> 96396aa (build_categories_admin_module)
 @endsection
 
 @section('boostrap')
@@ -18,12 +22,21 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
+<<<<<<< HEAD
                     <h1>{{ __('common.index') }}</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">{{ __('common.home') }}</a></li>
                         <li class="breadcrumb-item active">{{ __('common.index') }}</li>
+=======
+                    <h1>Danh sách</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+                        <li class="breadcrumb-item active">Danh sách</li>
+>>>>>>> 96396aa (build_categories_admin_module)
                     </ol>
                 </div>
             </div>
@@ -40,6 +53,7 @@
                         <div class="card-header">
                             <div class="row">
                                 <div class="col-sm-12 col-md-6">
+<<<<<<< HEAD
                                     <h3 class="card-title">
                                         {{ __('common.category') }}
                                     </h3>
@@ -49,6 +63,13 @@
                                     <a href="{{ route('categories.create') }}" class="btn btn-info float-right">
                                         {{ __('common.store') }}
                                     </a>
+=======
+                                    <h3 class="card-title">Danh sách danh mục sản phẩm</h3>
+                                </div>
+
+                                <div class="col-sm-12 col-md-6">
+                                    <a href="{{ route('categories.create') }}" class="btn btn-info float-right">Thêm mới</a>
+>>>>>>> 96396aa (build_categories_admin_module)
                                 </div>
                             </div>
 
@@ -63,7 +84,11 @@
                                     <div class="col-sm-12 col-md-6">
                                         <form method="GET" action="{{ route('categories.index') }}">
                                             <div id="example1_filter" class="dataTables_filter">
+<<<<<<< HEAD
                                                 <label>{{ __('common.search') }} :
+=======
+                                                <label>Search:
+>>>>>>> 96396aa (build_categories_admin_module)
                                                     <input type="search" name="name" value="{{ old('name') }}" class="form-control form-control-sm" placeholder=""
                                                         aria-controls="example1">
                                                 </label>
@@ -86,11 +111,19 @@
                                                         #</th>
                                                     <th class="" tabindex="0" aria-controls="example1"
                                                         rowspan="1" colspan="1">
+<<<<<<< HEAD
                                                         {{ __('table.name', ['model' => __('common.category')]) }}
                                                     </th>
                                                     <th class="" tabindex="0" aria-controls="example1"
                                                         rowspan="1" colspan="1">
                                                         {{ __('table.action') }}
+=======
+                                                        Tên Danh mục
+                                                    </th>
+                                                    <th class="" tabindex="0" aria-controls="example1"
+                                                        rowspan="1" colspan="1">
+                                                        Thao tác
+>>>>>>> 96396aa (build_categories_admin_module)
                                                     </th>
                                                 </tr>
                                             </thead>
@@ -103,7 +136,11 @@
                                                             <td>
                                                                 <a href="{{route('categories.edit',$category->id)}}"
                                                                     class="btn btn-success btn-sm float-left mr-1">
+<<<<<<< HEAD
                                                                     {{ __('common.update') }}
+=======
+                                                                    Cập nhật
+>>>>>>> 96396aa (build_categories_admin_module)
                                                                 </a>
 
                                                                 <form action="{{route('categories.destroy',$category->id)}}"
@@ -112,7 +149,11 @@
                                                                     @csrf
                                                                     @method('DELETE')
                                                                     <button type="submit" class="btn btn-sm btn-danger btn-icon btn-delete">
+<<<<<<< HEAD
                                                                         {{ __('common.destroy') }}
+=======
+                                                                        Xóa
+>>>>>>> 96396aa (build_categories_admin_module)
                                                                     </button>
                                                                 </form>
                                                             </td>
@@ -120,7 +161,11 @@
                                                     @endforeach
                                                 @else
                                                     <tr>
+<<<<<<< HEAD
                                                         <td colspan="3">{{ __('table.no_data') }}</td>
+=======
+                                                        <td colspan="3">Không có dữ liệu hiển thị</td>
+>>>>>>> 96396aa (build_categories_admin_module)
                                                     </tr>
                                                 @endif
                                             </tbody>
@@ -130,7 +175,11 @@
                                 <div class="row">
                                     <div class="col-sm-12 col-md-5">
                                         <div class="dataTables_info" id="example1_info" role="status"
+<<<<<<< HEAD
                                             aria-live="polite">{{ __('pagination.total', ['total' => $categories->total()]) }}</div>
+=======
+                                            aria-live="polite">Hiện có {{ $categories->total() }} mục</div>
+>>>>>>> 96396aa (build_categories_admin_module)
                                     </div>
                                     <div class="col-sm-12 col-md-7">
                                         <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">

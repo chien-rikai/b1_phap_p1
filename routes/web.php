@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
+<<<<<<< HEAD
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\AuthController;
@@ -9,6 +10,8 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ExportController;
 
 
+=======
+>>>>>>> 96396aa (build_categories_admin_module)
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +24,7 @@ use App\Http\Controllers\ExportController;
 |
 */
 
+<<<<<<< HEAD
 Route::get('/locale/{locale}', [SettingController::class, 'locale'])->name('setting.locale');
 
 Route::prefix('admin')->group(function () {
@@ -46,4 +50,8 @@ Route::prefix('admin')->group(function () {
         Route::resource('categories', CategoryController::class);
         Route::resource('users', UserController::class);
     });
+=======
+Route::prefix('admin')->group(function () {
+    Route::resource('categories', CategoryController::class);
+>>>>>>> 96396aa (build_categories_admin_module)
 });
