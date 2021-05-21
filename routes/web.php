@@ -11,6 +11,7 @@ use App\Http\Controllers\ExportController;
 use App\Http\Controllers\SiteController;
 =======
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProductController;
 
 >>>>>>> ba0add2 (build_auth_admin_module)
 
@@ -70,7 +71,9 @@ Route::prefix('/ajax')->group(function () {
     Route::group(['middleware' => 'login'], function () {
         Route::get('user/view/change-pass/{id}', [UserController::class, 'viewChangePass'])->name('user.view.change.pass');
         Route::put('user/change-pass/{id}', [UserController::class, 'changePass'])->name('user.change.pass');
-        
+        Route::post('products/import', [ProductController::class, 'import'])->name('products.import');
+
+        Route::resource('products', ProductController::class);
         Route::resource('categories', CategoryController::class);
         Route::resource('users', UserController::class);
     });
