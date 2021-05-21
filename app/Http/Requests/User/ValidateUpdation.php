@@ -38,12 +38,21 @@ class ValidateUpdation extends FormRequest
     public function messages()
     {
         $messages = [
+<<<<<<< HEAD
             'name.required' => __('validation.required', ['attr' => __('common.user')]),
             'name.max' => __('validation.max', ['attr' => __('common.user'), 'max' => '100']),
         ];
 
         if (!empty(Request::all('url_image'))) {
             $messages['url_image.image'] = __('validation.image');
+=======
+            'name.required' => 'Tên quản trị viên không được bỏ trống !',
+            'name.max' => 'Tên quản trị viên không được quá 100 kí tự !',
+        ];
+
+        if (!empty(Request::all('url_image'))) {
+            $messages['url_image.image'] = 'Hình ảnh tải lên không đúng định dạng cho phép !';
+>>>>>>> b9956af (build_users_admin_module)
         }
 
         return $messages;

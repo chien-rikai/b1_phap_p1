@@ -68,7 +68,11 @@ Route::prefix('/ajax')->group(function () {
     Route::get('/remove-out-cart/{id}', [SiteController::class, 'removeOutCart'])->name('remove.out.cart');
 =======
     Route::group(['middleware' => 'login'], function () {
+        Route::get('user/view/change-pass/{id}', [UserController::class, 'viewChangePass'])->name('user.view.change.pass');
+        Route::put('user/change-pass/{id}', [UserController::class, 'changePass'])->name('user.change.pass');
+        
         Route::resource('categories', CategoryController::class);
+        Route::resource('users', UserController::class);
     });
 >>>>>>> ba0add2 (build_auth_admin_module)
 });
