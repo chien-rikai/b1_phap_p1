@@ -4,15 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Repositories\ProductRepository;
+use App\Http\Requests\Site\ValidatePayment;
 use App\Services\SiteService;
-use App\Models\Product;
 use Session;
 
 class SiteController extends Controller
 {
     protected $productRepo;
     protected $siteService;
-
 
     public function __construct(ProductRepository $productRepo,
                                 SiteService $siteService)
@@ -83,8 +82,14 @@ class SiteController extends Controller
         ]);
     }
 
-    public function payment(Request $request)
+    public function payment()
     {
+        return view('site.payment');
+    }
 
+    public function doPayment(ValidatePayment $request)
+    {
+        $this->siteService->doPayment($request);
+        return back();
     }
 }

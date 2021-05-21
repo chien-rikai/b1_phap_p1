@@ -4,10 +4,6 @@
     SupperMarket | {{ __('common.login') }}
 @endsection
 
-@section('boostrap')
-
-@endsection
-
 @section('content')
 <!-- /.login-logo -->
 <div class="card">
@@ -83,6 +79,3 @@
 </div>
 @endsection
 
-@section('script')
-
-@endsection

@@ -7,10 +7,6 @@
 ]) }}
 @endsection
 
-@section('boostrap')
-
-@endsection
-
 @section('content')
 
 <div class="card">
@@ -172,6 +168,3 @@
 
 @endsection
 
-@section('script')
-
-@endsection

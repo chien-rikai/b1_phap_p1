@@ -9,6 +9,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ExportController;
 use App\Http\Controllers\SiteController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -51,7 +52,8 @@ Route::prefix('admin')->group(function () {
 Route::prefix('/')->group(function () {
     Route::get('/', [SiteController::class, 'home'])->name('site.home');
     Route::get('/cart', [SiteController::class, 'cart'])->name('cart');
-    Route::post('/payment', [SiteController::class, 'payment'])->name('payment');
+    Route::get('/payment', [SiteController::class, 'payment'])->name('payment');
+    Route::post('/do-payment', [SiteController::class, 'doPayment'])->name('do.payment');
     Route::get('/{slugCate}/{slug?}', [SiteController::class, 'detail'])->name('site.detail');
 });
 
@@ -60,4 +62,5 @@ Route::prefix('/ajax')->group(function () {
     Route::post('/add-to-cart', [SiteController::class, 'addToCart'])->name('add.to.cart');
     Route::post('/update-cart', [SiteController::class, 'updateCart'])->name('update.cart');
     Route::get('/remove-out-cart/{id}', [SiteController::class, 'removeOutCart'])->name('remove.out.cart');
+
 });

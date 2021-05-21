@@ -16,7 +16,12 @@ trait ImageResize
      * status cut image or resize : 0 => Image aspect ratio, 1 => cut image , 2 => resize image custom. default status = 0
      * quality
      */
-    public function uploadImage($img, $filename, $url, $sizeX = 960, $sizeY = 0, $status = 0, $quality = 100)
+    public function uploadImage($img, $filename, $url, $config = [
+        'sizeX' => 960,
+        'sizeY' => 0,
+        'status' => 0,
+        'quality' => 100
+    ])
     {   
         $path = storage_path('app/public/' . $url . '/' . $filename);
     
@@ -26,21 +31,21 @@ trait ImageResize
        
         //Create image size and save image local
         try {
-            switch ($status):
+            switch ($config['status']):
                 case 1:
-                    Image::make($img->getRealPath())->resize($sizeX, null, function ($constraint) {
+                    Image::make($img->getRealPath())->resize($config['sizeX'], null, function ($constraint) {
                         $constraint->aspectRatio();
-                    })->fit($sizeX, $sizeY)->save($path, $quality);
+                    })->fit($config['sizeX'], $config['sizeY'])->save($path, $config['quality']);
                     break;
                 case 2:
-                    Image::make($img->getRealPath())->resize($sizeX, $sizeY, function ($constraint) {
+                    Image::make($img->getRealPath())->resize($config['sizeX'], $config['sizeY'], function ($constraint) {
                         $constraint->aspectRatio();
-                    })->save($path, $quality);
+                    })->save($path, $config['quality']);
                     break;
                 default:
-                    Image::make($img->getRealPath())->resize($sizeX, null, function ($constraint) {
+                    Image::make($img->getRealPath())->resize($config['sizeX'], null, function ($constraint) {
                         $constraint->aspectRatio();
-                    })->save($path, $quality);
+                    })->save($path, $config['quality']);
             endswitch;
 
             return 1;

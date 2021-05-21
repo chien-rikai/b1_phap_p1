@@ -58,4 +58,9 @@ return [
     'update_to_cart' => 'Cập nhật giỏ hàng',
     'related_products' => 'Sản phẩm liên quan',
     'detail_product' => 'Chi tiết sản phẩm',
+    'confirm' => 'Xác nhận',
+    'address' => 'Địa chỉ',
+    'phone' => 'Số điện thoại',
+    'email' => 'Địa chỉ Email',
+    'name_custom' => 'Tên khách hàng'
 ];
