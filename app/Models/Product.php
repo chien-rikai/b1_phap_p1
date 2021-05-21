@@ -18,10 +18,7 @@ class Product extends Model
         'description',
         'price',
         'price_promotion',
-<<<<<<< HEAD
         'stock',
-=======
->>>>>>> a8af8ee (build_product_admin_module)
         'view',
         'count_rating',
         'score_rating',

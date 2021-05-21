@@ -28,7 +28,7 @@ class ValidateUpdation extends FormRequest
             'name' => ['required', 'max:100', 'unique:products,id,name'],
             'price' => ['required', 'regex:/^[0-9\.]+$/'],
             'price_promotion' => ['nullable', 'regex:/^[0-9\.]+$/'],
-            'stock' => ['regex:/^[0-9\.]+$/'],
+            'stock' => ['regex:/^[0-9]+$/'],
         ];
 
         if (Request::all('url_image')) {

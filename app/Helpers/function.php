@@ -43,3 +43,9 @@ function formatCurrencyFrontEnd($str)
     return $str;
 }
 
+function formatCurrencyBackEnd($str)
+{
+    $str = preg_replace("/([^0-9\\,-])/i", "", $str);;
+    return $str;
+}
+

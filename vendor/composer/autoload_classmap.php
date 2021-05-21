@@ -36,6 +36,7 @@ return array(
     'App\\Http\\Requests\\User\\ValidateChangePass' => $baseDir . '/app/Http/Requests/User/ValidateChangePass.php',
     'App\\Http\\Requests\\User\\ValidateCreation' => $baseDir . '/app/Http/Requests/User/ValidateCreation.php',
     'App\\Http\\Requests\\User\\ValidateUpdation' => $baseDir . '/app/Http/Requests/User/ValidateUpdation.php',
+    'App\\Imports\\ProductImport' => $baseDir . '/app/Imports/ProductImport.php',
     'App\\Mail\\SendCode' => $baseDir . '/app/Mail/SendCode.php',
     'App\\Models\\Category' => $baseDir . '/app/Models/Category.php',
     'App\\Models\\Product' => $baseDir . '/app/Models/Product.php',
