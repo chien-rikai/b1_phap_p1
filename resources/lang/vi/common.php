@@ -7,7 +7,10 @@ return [
     'home' => 'Trang chủ',
     'back' => 'Quay lại',
     'save' => 'Lưu',
+
     'category' => 'Danh mục sản phẩm',
+    'user' => 'Quản trị viên',
+
     'store' => 'Thêm mới',
     'index' => 'Danh sách',
     'update' => 'Cập nhật',
@@ -20,6 +23,8 @@ return [
     'find_email' => 'Tìm tài khoản',
     'verify_code' => 'Mã xác nhận',
     'password' => 'Mật khẩu',
+    'password_new' => 'Mật khẩu mới',
+    'password_verify' => 'Xác nhận mật khẩu',
     'password_confirm' => 'Nhập lại mật khẩu không khớp',
     'change_password' => 'Đổi mật khẩu',
     'place_password' => 'Nhập mật khẩu',

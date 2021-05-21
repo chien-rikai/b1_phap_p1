@@ -8,4 +8,5 @@ return [
     'max' => ':attr không được quá :max kí tự !',
     'verify_code' => 'Mã xác nhận không đúng hoặc đã hết hạn. Vui lòng thử lại !',
     'same' => ':attr không khớp',
+    'image' => 'Hình ảnh tải lên không đúng định dạng cho phép !',
 ];
