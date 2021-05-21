@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProductController;
 
 
 /*
@@ -35,7 +36,9 @@ Route::prefix('admin')->group(function () {
     Route::group(['middleware' => 'login'], function () {
         Route::get('user/view/change-pass/{user}', [UserController::class, 'viewChangePass'])->name('user.view.change.pass');
         Route::put('user/change-pass/{id}', [UserController::class, 'changePass'])->name('user.change.pass');
-        
+        Route::post('products/import', [ProductController::class, 'import'])->name('products.import');
+
+        Route::resource('products', ProductController::class);
         Route::resource('categories', CategoryController::class);
         Route::resource('users', UserController::class);
     });

@@ -21,6 +21,7 @@ class CreateProductsTable extends Migration
             $table->text('description');
             $table->decimal('price', 15, 0)->unsigned();
             $table->decimal('price_promotion', 15, 0)->unsigned()->nullable();
+            $table->tinyInteger('stock')->default(0);
             $table->integer('view')->unsigned()->nullable()->default(0);
             $table->integer('count_rating')->unsigned()->nullable()->default(1);
             $table->integer('score_rating')->unsigned()->nullable()->default(3);
