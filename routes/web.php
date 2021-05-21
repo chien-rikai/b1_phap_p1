@@ -2,12 +2,17 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
+<<<<<<< HEAD
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ExportController;
 use App\Http\Controllers\SiteController;
+=======
+use App\Http\Controllers\AuthController;
+
+>>>>>>> ba0add2 (build_auth_admin_module)
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +34,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/falied', [AuthController::class, 'getFalied'])->name('get.falied');
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
+<<<<<<< HEAD
     Route::get('/forgot-password', [AuthController::class, 'forgotPassword'])->name('forgot.password');
     Route::get('verify-code', [AuthController::class, 'verifyCode'])->name('verify.code');
     Route::get('reset-password', [AuthController::class, 'resetPassword'])->name('reset.password');
@@ -60,4 +66,9 @@ Route::prefix('/ajax')->group(function () {
     Route::post('/add-to-cart', [SiteController::class, 'addToCart'])->name('add.to.cart');
     Route::post('/update-cart', [SiteController::class, 'updateCart'])->name('update.cart');
     Route::get('/remove-out-cart/{id}', [SiteController::class, 'removeOutCart'])->name('remove.out.cart');
+=======
+    Route::group(['middleware' => 'login'], function () {
+        Route::resource('categories', CategoryController::class);
+    });
+>>>>>>> ba0add2 (build_auth_admin_module)
 });
