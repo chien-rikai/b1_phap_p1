@@ -1,0 +1,1 @@
+The Verify Code : {{ Session::get('verify_code') }}

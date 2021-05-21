@@ -26,7 +26,9 @@ class CategoryController extends Controller
      */
     public function index(Request $request)
     {
-        $params = $request->all();
+        $params = [
+            'name' => $request->input('name'), 
+        ];
 
         $categories = $this->categoryRepo->search($params);
 
@@ -51,8 +53,10 @@ class CategoryController extends Controller
      */
     public function store(CategoryCreate $request)
     {
-        $params = $request->all();
-        $params['slug'] = Str::slug($params['name']);
+        $params = [
+            'name' => $request->input('name'), 
+            'slug' => Str::slug($params['name'])
+        ];
 
         $category = $this->categoryRepo->create($params);
 
@@ -103,9 +107,10 @@ class CategoryController extends Controller
      */
     public function update(CategoryUpdate $request, $id)
     {
-        $params = $request->all();
-        unset($params['_token'], $params['_method']);
-        $params['slug'] = Str::slug($params['name']);
+        $params = [
+            'name' => $request->input('name'), 
+            'slug' => Str::slug($params['name'])
+        ];
 
         $updation = $this->categoryRepo->update($id, $params);
 
