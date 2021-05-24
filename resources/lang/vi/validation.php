@@ -11,4 +11,6 @@ return [
     'image' => 'Hình ảnh tải lên không đúng định dạng cho phép !',
     'regex' => ':attr không đúng định dạng hợp lệ !',
     'mimes' => 'File không đúng định dạng cho phép !',
+    'phone' => 'Số điện thoại không đúng định dạng cho phép !',
+    'phone_lenght' => 'Số điện thoại không đúng độ dài cho phép !'
 ];

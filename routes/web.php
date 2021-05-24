@@ -54,6 +54,7 @@ Route::prefix('/')->group(function () {
     Route::get('/cart', [SiteController::class, 'cart'])->name('cart');
     Route::get('/payment', [SiteController::class, 'payment'])->name('payment');
     Route::post('/do-payment', [SiteController::class, 'doPayment'])->name('do.payment');
+    Route::get('/payment/success', [SiteController::class, 'success'])->name('payment.success');
     Route::get('/{slugCate}/{slug?}', [SiteController::class, 'detail'])->name('site.detail');
 });
 
@@ -62,5 +63,4 @@ Route::prefix('/ajax')->group(function () {
     Route::post('/add-to-cart', [SiteController::class, 'addToCart'])->name('add.to.cart');
     Route::post('/update-cart', [SiteController::class, 'updateCart'])->name('update.cart');
     Route::get('/remove-out-cart/{id}', [SiteController::class, 'removeOutCart'])->name('remove.out.cart');
-
 });

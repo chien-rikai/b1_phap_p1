@@ -89,7 +89,10 @@ class SiteController extends Controller
 
     public function doPayment(ValidatePayment $request)
     {
-        $this->siteService->doPayment($request);
-        return back();
+        if ($this->siteService->doPayment($request) != null) {
+            return back();
+        }
+
+        return view('site.payment-success');
     }
 }

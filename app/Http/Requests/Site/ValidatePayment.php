@@ -3,6 +3,9 @@
 namespace App\Http\Requests\Site;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\Phone;
+use App\Rules\PhoneLenght;
+use App\Rules\EmailAllow;
 
 class ValidatePayment extends FormRequest
 {
@@ -26,7 +29,7 @@ class ValidatePayment extends FormRequest
         $rules = [
             'name' => ['required', 'max:100'],
             'email' => ['required', 'email:rfc,dns'],
-            'phone' => ['required'],
+            'phone' => ['required', new Phone(), new PhoneLenght()],
             'address' => ['required']
         ];
 
