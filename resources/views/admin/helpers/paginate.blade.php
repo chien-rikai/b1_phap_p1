@@ -5,14 +5,14 @@
             <li class="paginate_button page-item previous disabled"
                 id="example1_previous">
                 <a href="#" aria-controls="example1"
-                    data-dt-idx="0" tabindex="0" class="page-link">Previous
+                    data-dt-idx="0" tabindex="0" class="page-link">{{ __('pagination.previous') }}
                 </a>
             </li>
         @else
             <li class="paginate_button page-item previous"
                 id="example1_previous">
                 <a href="{{ $paginator->previousPageUrl() }}" aria-controls="example1"
-                    data-dt-idx="0" tabindex="0" class="page-link">Previous
+                    data-dt-idx="0" tabindex="0" class="page-link">{{ __('pagination.previous') }}
                 </a>
             </li>
         @endif
@@ -60,13 +60,13 @@
         @if ($paginator->hasMorePages())
             <li class="paginate_button page-item next" id="example1_next">
                     <a href="{{ $paginator->nextPageUrl() }}" aria-controls="example1" data-dt-idx="7" tabindex="0"
-                    class="page-link">Next
+                    class="page-link">{{ __('pagination.next') }}
                 </a>
             </li>
         @else
             <li class="paginate_button page-item next disabled" id="example1_next">
                 <a href="#" aria-controls="example1" data-dt-idx="7" tabindex="0"
-                    class="page-link">Next
+                    class="page-link">{{ __('pagination.next') }}
                 </a>
             </li>
         @endif
