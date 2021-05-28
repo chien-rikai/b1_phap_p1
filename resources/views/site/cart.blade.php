@@ -81,7 +81,7 @@ SupperMarket | {{ __('common.cart') }}
                 <h4><a href="" id="update-cart">{{ __('common.update_to_cart') }}</a></h4>
             </div>
             <div class="checkout-right-basket">
-                <a href="single.html"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>{{ __('common.payment') }}</a>
+                <a href="{{ route('payment') }}"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>{{ __('common.payment') }}</a>
             </div>
             <div class="clearfix"> </div>
         </div>

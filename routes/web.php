@@ -52,7 +52,8 @@ Route::prefix('admin')->group(function () {
 Route::prefix('/')->group(function () {
     Route::get('/', [SiteController::class, 'home'])->name('site.home');
     Route::get('/cart', [SiteController::class, 'cart'])->name('cart');
-    Route::post('/payment', [SiteController::class, 'payment'])->name('payment');
+    Route::get('/payment', [SiteController::class, 'payment'])->name('payment');
+    Route::post('/do-payment', [SiteController::class, 'doPayment'])->name('do.payment');
     Route::get('/{slugCate}/{slug?}', [SiteController::class, 'detail'])->name('site.detail');
 });
 

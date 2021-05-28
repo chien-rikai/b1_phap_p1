@@ -26,10 +26,7 @@ class ValidateCreation extends FormRequest
     {
         $rules = [
             'name' => ['required', 'max:100'],
-<<<<<<< HEAD
             'email' => ['required', 'email:rfc,dns'],
-=======
->>>>>>> b9956af (build_users_admin_module)
             'password' => ['required'],
             'password_verify' => ['required', 'same:password']
         ];
@@ -44,7 +41,6 @@ class ValidateCreation extends FormRequest
     public function messages()
     {
         $messages = [
-<<<<<<< HEAD
             'name.required' => __('validation.required', ['attr' => __('common.user')]),
             'name.max' => __('validation.max', ['attr' => __('common.user'), 'max' => '100']),
 
@@ -58,18 +54,6 @@ class ValidateCreation extends FormRequest
 
         if (!empty(Request::all('url_image'))) {
             $messages['url_image.image'] = __('validation.image');
-=======
-            'name.required' => 'Tên quản trị viên không được bỏ trống !',
-            'name.max' => 'Tên quản trị viên không được quá 100 kí tự !',
-
-            'password.required' => 'Mật khẩu không được bỏ trống',
-            'password_verify.same' => 'Xác nhận mật khẩu không khớp',
-            'password_verify.required' => 'Xác nhận mật khẩu không được bỏ trống',
-        ];
-
-        if (!empty(Request::all('url_image'))) {
-            $messages['url_image.image'] = 'Hình ảnh tải lên không đúng định dạng cho phép !';
->>>>>>> b9956af (build_users_admin_module)
         }
 
         return $messages;
