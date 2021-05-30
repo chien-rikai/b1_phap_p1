@@ -45,8 +45,8 @@ class ProductService
             'slug' => Str::slug($request->name).time(),
             'url_image' => $request->file('url_image'),
             'description' => $request->description,
-            'price' => $request->price,
-            'price_promotion' => $request->price_promotion,
+            'price' => formatCurrencyBackEnd($request->price),
+            'price_promotion' => formatCurrencyBackEnd($request->price_promotion),
             'stock' => $request->stock,
             'category_id' => $request->category_id,
         ];
@@ -54,9 +54,24 @@ class ProductService
         if (isset($params['url_image'])) {
             $filename = $params['slug'] . time() . '.' . $params['url_image']->getClientOriginalExtension();
 
-            $imageAvatar = $this->uploadImage($params['url_image'], $filename, 'projects/avatar', 100, 100, 1, 100);
-            $imageDisplay = $this->uploadImage($params['url_image'], $filename, 'projects/display', 150, 150, 1, 100);
-            $imageDetail = $this->uploadImage($params['url_image'], $filename, 'projects/detail', 300, 300, 1, 100);
+            $imageAvatar = $this->uploadImage($params['url_image'], $filename, 'projects/avatar', [
+                'sizeX' => 100, 
+                'sizeY' => 100, 
+                'status' => 1, 
+                'quality' => 100
+            ]);
+            $imageDisplay = $this->uploadImage($params['url_image'], $filename, 'projects/display', [
+                'sizeX' => 150, 
+                'sizeY' => 150, 
+                'status' => 1, 
+                'quality' => 100
+            ]);
+            $imageDetail = $this->uploadImage($params['url_image'], $filename, 'projects/detail', [
+                'sizeX' => 300, 
+                'sizeY' => 300, 
+                'status' => 1, 
+                'quality' => 100
+            ]);
             
             if (isset($imageAvatar) && isset($imageDisplay) && isset($imageDetail)) {
                 $params['url_image'] = $filename;
@@ -68,7 +83,7 @@ class ProductService
         if (blank($product)) {
             Session::flash('error', __('message.error', ['action' => __('common.store'), 'model' => __('common.product')]));
         } else {
-            Session::flash('error', __('message.success', ['action' => __('common.store'), 'model' => __('common.product')]));
+            Session::flash('success', __('message.success', ['action' => __('common.store'), 'model' => __('common.product')]));
         }
 
         return;
@@ -81,8 +96,8 @@ class ProductService
             'slug' => Str::slug($request->name).time(),
             'url_image' => $request->file('url_image'),
             'description' => $request->description,
-            'price' => $request->price,
-            'price_promotion' => $request->price_promotion,
+            'price' => formatCurrencyBackEnd($request->price),
+            'price_promotion' => formatCurrencyBackEnd($request->price_promotion),
             'stock' => $request->stock,
             'category_id' => $request->category_id,
         ];
@@ -90,9 +105,24 @@ class ProductService
         if (isset($params['url_image'])) {
             $filename = $params['slug'] . time() . '.' . $params['url_image']->getClientOriginalExtension();
 
-            $imageAvatar = $this->uploadImage($params['url_image'], $filename, 'projects/avatar', 100, 100, 1, 100);
-            $imageDisplay = $this->uploadImage($params['url_image'], $filename, 'projects/display', 150, 150, 1, 100);
-            $imageDetail = $this->uploadImage($params['url_image'], $filename, 'projects/detail', 300, 300, 1, 100);
+            $imageAvatar = $this->uploadImage($params['url_image'], $filename, 'projects/avatar', [
+                'sizeX' => 100, 
+                'sizeY' => 100, 
+                'status' => 1, 
+                'quality' => 100
+            ]);
+            $imageDisplay = $this->uploadImage($params['url_image'], $filename, 'projects/display', [
+                'sizeX' => 150, 
+                'sizeY' => 150, 
+                'status' => 1, 
+                'quality' => 100
+            ]);
+            $imageDetail = $this->uploadImage($params['url_image'], $filename, 'projects/detail', [
+                'sizeX' => 300, 
+                'sizeY' => 300, 
+                'status' => 1, 
+                'quality' => 100
+            ]);
             
             if (isset($imageAvatar) && isset($imageDisplay) && isset($imageDetail)) {
                 $delImage = [
@@ -111,7 +141,7 @@ class ProductService
         if (!$updation) {
             Session::flash('error', __('message.error', ['action' => __('common.update'), 'model' => __('common.product')]));
         } else {
-            Session::flash('error', __('message.success', ['action' => __('common.update'), 'model' => __('common.product')]));
+            Session::flash('success', __('message.success', ['action' => __('common.update'), 'model' => __('common.product')]));
         }
 
         return;
@@ -136,5 +166,14 @@ class ProductService
         }
 
         return;
+    }
+
+    public function changeStatus(Product $product)
+    {
+        if (blank($product)) {
+            return 0;
+        }
+
+        return $product->update(['display' => !$product->display]);
     }
 }

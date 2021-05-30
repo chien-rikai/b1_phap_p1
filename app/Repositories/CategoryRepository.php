@@ -15,7 +15,7 @@ class CategoryRepository extends AbstractRepository
 
     public function search($params)
     {
-        $data = $this->model->select(['id', 'name']);
+        $data = $this->model->select(['id', 'name', 'display']);
 
         if (isset($params['name']))
         {

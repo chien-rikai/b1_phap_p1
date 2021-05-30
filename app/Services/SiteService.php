@@ -24,6 +24,17 @@ class SiteService
         $this->orderRepo = $orderRepo;
     }
 
+    public function product($slug)
+    {
+        $product = $this->productRepo->getProductBySlug($slug);
+        $this->productRepo->incrementView($product->id);
+
+        return [
+            'product' => $product,
+            'products' => $this->productRepo->getProductsSameCategory($product->category_id)
+        ];
+    }
+
     public function rating(Request $request)
     {
         if ($request->has(['count_rating', 'star_rating', 'star', 'score_rating'])) {

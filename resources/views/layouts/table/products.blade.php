@@ -26,6 +26,10 @@
                     </th>
                     <th class="" tabindex="0" aria-controls="example1"
                         rowspan="1" colspan="1">
+                        {{ __('table.status_display') }}
+                    </th>
+                    <th class="" tabindex="0" aria-controls="example1"
+                        rowspan="1" colspan="1">
                         {{ __('table.action') }}
                     </th>
                 </tr>
@@ -45,7 +49,10 @@
                                 <b>- {{ __('common.price_promotion') }} :</b> {{ formatCurrencyFrontEnd($product->price_promotion).' vnđ' }}<br>
                                 <b>- {{ __('common.view') }} :</b> {{ $product->view }} <i class="far fa-eye"></i><br>
                                 <b>- {{ __('common.star_rating') }} :</b> {{ $product->star_rating }} <i class="fas fa-star"></i><br>
-
+                            </td>
+                            <td>
+                                <input type="checkbox" {{ ($product->display) ? 'checked' : '' }} data-toggle="toggle" data-product-id="{{ $product->id }}"
+                                    data-size="sm" data-onstyle="info" class="status-display-product">
                             </td>
                             <td>
                                 <a href="{{route('products.edit',$product->id)}}"

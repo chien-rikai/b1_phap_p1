@@ -101,6 +101,10 @@
                                                             <td>{{ ++$key }}</td>
                                                             <td>{{ $category->name }}</td>
                                                             <td>
+                                                                <input type="checkbox" {{ ($category->display) ? 'checked' : '' }} data-toggle="toggle" data-category-id="{{ $category->id }}"
+                                                                    data-size="sm" data-onstyle="info" class="status-display-category">
+                                                            </td>
+                                                            <td>
                                                                 <a href="{{route('categories.edit',$category->id)}}"
                                                                     class="btn btn-success btn-sm float-left mr-1">
                                                                     {{ __('common.update') }}

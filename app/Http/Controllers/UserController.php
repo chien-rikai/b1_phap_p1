@@ -70,12 +70,7 @@ class UserController extends Controller
 
     public function update(UserUpdate $request, $id)
     {
-        $params = [
-            'name' => $request->input('name'),
-            'url_image' => $request->file('url_image') ?? null,
-        ];
-
-        $this->userService->update($params, $id);
+        $this->userService->update($request, $id);
 
         return redirect()->route('users.index');
     }
@@ -85,7 +80,7 @@ class UserController extends Controller
         if (blank($user)) {
             Session::flash('error', __('message.not_found'));
         }else {
-            $this->userService->destroy($id);
+            $this->userService->destroy($user);
         }
        
         return redirect()->route('users.index');

@@ -5,7 +5,11 @@ namespace App\Services;
 use App\Traits\ImageResize;
 use App\Repositories\UserRepository;
 use Session;
+use File;
+use App\Models\User;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Http\Request;
 
 class UserService 
 {
@@ -51,14 +55,20 @@ class UserService
         if (blank($user)) {
             Session::flash('error', __('message.error', ['action' => __('common.store'), 'model' => __('common.user')]));
         } else {
-            Session::flash('error', __('message.success', ['action' => __('common.store'), 'model' => __('common.user')]));
+            Session::flash('success', __('message.success', ['action' => __('common.store'), 'model' => __('common.user')]));
         }
 
         return;
     }
 
-    public function update($params, $id)
+    public function update(Request $request, $id)
     {
+        $params = [
+            'name' => $request->input('name'),
+            'url_image' => $request->file('url_image') ?? null,
+            'status' => $request->status
+        ];
+
         if (isset($params['url_image'])){
             $filename = Str::slug($params['name']) . time() . '.' . $params['url_image']->getClientOriginalExtension();
       
@@ -99,9 +109,16 @@ class UserService
         return;
     }
 
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        $deletion = $this->userRepo->delete($id);
+        $delImage = [
+            storage_path('app/public/users/avatar/' . $user->url_image),
+            storage_path('app/public/users/display/' . $user->url_image),
+        ];
+
+        File::delete($delImage);
+
+        $deletion = $user->delete();
 
         if ($deletion) {
             Session::flash('success', __('message.success', ['action' => __('common.destroy'), 'model' => __('common.user')]));

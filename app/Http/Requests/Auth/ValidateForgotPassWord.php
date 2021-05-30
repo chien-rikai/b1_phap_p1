@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\BlockUser;
 
 class ValidateForgotPassWord extends FormRequest
 {
@@ -24,7 +25,7 @@ class ValidateForgotPassWord extends FormRequest
     public function rules()
     {
         return [
-            'email' => ['bail', 'email:rfc,dns', 'exists:users']
+            'email' => ['bail', 'email:rfc,dns', 'exists:users', new BlockUser()]
         ];
     }
 
