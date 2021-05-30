@@ -41,7 +41,7 @@ class AuthController extends Controller
         
         if (Auth::attempt($auth)) {
             session_start();
-            return redirect()->route('categories.index');
+            return redirect()->route('dashboard');
         }
 
         Session::flash('error_login', __('message.error_login'));

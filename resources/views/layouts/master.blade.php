@@ -36,7 +36,8 @@
     <!-- summernote -->
     <link rel="stylesheet" href="{{ asset('admin/plugins/summernote/summernote-bs4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/custom.css') }}">
-
+    <!-- Bootstrap Switch -->
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -102,6 +103,10 @@
     <script src="{{ asset('admin/plugins/sweetalert2/sweetalert2.min.js') }}"></script>
     <!-- Toastr -->
     <script src="{{ asset('admin/plugins/toastr/toastr.min.js') }}"></script>
+    <!-- Bootstrap Switch -->
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+    <!-- ChartJS -->
+    <script src="{{ asset('admin/plugins/chart.js/Chart.min.js') }}"></script>
     <!-- AdminLTE App -->
     <script src="{{ asset('admin/dist/js/adminlte.js') }}"></script>
     <!-- AdminLTE for demo purposes -->
@@ -113,15 +118,9 @@
     @include('layouts.success')
     @include('layouts.error')
 
-    <script>
-        $(".btn-delete").on("click", function () {
-            let check = confirm("Chú ý. Thao tác này sẽ xóa vĩnh viễn cùng với những dữ liệu liên quan. Đồng ý tiếp tục ?");
-            if (!check) {
-                return false;
-            }
-        });
-    </script>
+    @include('admin.scripts.function')
 
+    @yield('script')
 </body>
 
 </html>

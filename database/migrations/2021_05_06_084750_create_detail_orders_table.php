@@ -19,7 +19,6 @@ class CreateDetailOrdersTable extends Migration
             $table->integer('order_id')->unsigned();
             $table->decimal('price_base', 15, 0)->unsigned();
             $table->decimal('price_promotion', 15, 0)->unsigned();
-            $table->decimal('payment', 15, 0)->unsigned();
             $table->tinyInteger('amount')->unsigned();
             $table->timestamps();
         });

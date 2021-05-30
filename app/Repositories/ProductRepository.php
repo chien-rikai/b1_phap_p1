@@ -4,13 +4,14 @@
 namespace App\Repositories;
 
 use App\Models\Product;
+use Session;
 
 class ProductRepository extends AbstractRepository
 {
     public function getModel()
     {
         return Product::class;
-    }
+    } 
 
     public function search($params)
     {
@@ -41,13 +42,13 @@ class ProductRepository extends AbstractRepository
             $data->orderBy('price', $params['sort_price']);
         }
 
-        return $data->orderBy('id','DESC')
+        return $data->orderBy('id', 'DESC')
                     ->paginate(parent::LIMIT);
     }
 
     public function searchOnSite($name)
     {
-        return $this->model->where('name', 'LIKE', '%'.$name.'%')->orderBy('id','DESC')->paginate(9);
+        return $this->model->where('name', 'LIKE', '%'.$name.'%')->display()->paginate(9);
     }
 
     public function getListProductsBySlugCate($slug, $param)
@@ -95,19 +96,22 @@ class ProductRepository extends AbstractRepository
             $query->whereSlug($slug);
         });
 
-        return $data->orderBy('id', 'DESC')->paginate(9);
+        return $data->display()->paginate(9);
     }
 
     public function getProductsSameCategory($cateId)
     {
         return $this->model->select()->whereHas('category', function ($query) use ($cateId) {
             $query->whereId($cateId);
-        })->orderBy('id', 'DESC')->paginate(4);
+        })->display()->paginate(4);
     }
 
     public function getProductBySlug($slug)
     {
-        return $this->model->whereSlug($slug)->first();
+        return $this->model->firstWhere([
+            ['slug', $slug],
+            ['display', true]
+        ]);
     }
 
     public function incrementView($id)
@@ -116,21 +120,70 @@ class ProductRepository extends AbstractRepository
     }
 
     public function rating($params)
-    {
-        return $this->model->whereId('id', $params['id'])->update([
-            ['count_rating' => $params['count_rating']],
-            ['score_rating' => $params['score_rating']],
-            ['star_rating' => $params['star_rating']]
+    {   
+        $this->model->whereId($params['id'])->update([
+            'count_rating' => $params['count_rating'],
+            'score_rating' => $params['score_rating'],
+            'star_rating' => $params['star_rating']
         ]);
+
+        return $params['star_rating'];
     }
 
     public function getHotProducts()
     {
-        return $this->model->orderBy('view', 'DESC')->limit(4)->get();
+        return $this->model->display('view')->limit(4)->get();
     }
 
     public function getSaleProducts()
     {
-        return $this->model->where('price_promotion', '<>', 0)->orderBy('id', 'DESC')->limit(4)->get();
+        return $this->model->where('price_promotion', '<>', 0)->display()->limit(4)->get();
+    }
+
+    public function getTrash()
+    {
+        return $this->model->onlyTrashed()->orderBy('deleted_at', 'DESC')
+        ->paginate(parent::LIMIT);
+    }
+
+    public function restore($id)
+    {
+        $product = $this->model->onlyTrashed()->find($id);
+
+        if (blank($product)) {
+            Session::flash('error', __('message.not_found'));
+            return;
+        }
+        
+        if ($product->restore()) {
+            Session::flash('success', __('message.restore'));
+        } else {
+            Session::flash('error', __('message.error', ['action' => __('common.destroy'), 'model' => __('common.product')]));
+        }
+
+        return;
+    }
+
+    public function forceDestroy($id)
+    {
+        $product = $this->model->onlyTrashed()->find($id);
+
+        if (blank($product)) {
+            Session::flash('error', __('message.not_found'));
+            return;
+        }
+        
+        if ($product->forceDelete()) {
+            Session::flash('success', __('message.success', ['action' => __('common.destroy'), 'model' => __('common.product')]));
+        } else {
+            Session::flash('error', __('message.error', ['action' => __('common.destroy'), 'model' => __('common.product')]));
+        }
+
+        return;
+    }
+
+    public function getNewProduct($limit = self::LIMIT)
+    {
+        return $this->model->display()->orderBy('id', 'DESC')->limit($limit)->get();
     }
 }

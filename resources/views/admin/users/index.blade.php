@@ -41,11 +41,14 @@
                                     </h3>
                                 </div>
 
-                                <div class="col-sm-12 col-md-6">
-                                    <a href="{{ route('users.create') }}" class="btn btn-info float-right">
-                                        {{ __('common.store') }}
-                                    </a>
-                                </div>
+                                @if (Auth::user()->role === 'admin')
+                                    <div class="col-sm-12 col-md-6">
+                                        <a href="{{ route('users.create') }}" class="btn btn-info float-right">
+                                            {{ __('common.store') }}
+                                        </a>
+                                    </div>    
+                                @endif
+                                
                             </div>
 
                         </div>
@@ -120,17 +123,19 @@
                                                             <td>{{ $user->role }}</td>
 
                                                             <td>
-                                                                <a href="{{route('users.edit',$user->id)}}"
-                                                                    class="btn btn-success btn-sm float-left mr-1">
-                                                                    {{ __('common.update') }}
-                                                                </a>
+                                                                @if (Auth::user()->id === $user->id || Auth::user()->role === 'admin')
+                                                                    <a href="{{route('users.edit',$user->id)}}"
+                                                                        class="btn btn-success btn-sm float-left mr-1">
+                                                                        {{ __('common.update') }}
+                                                                    </a>
 
-                                                                <a href="{{route('user.view.change.pass',$user->id)}}"
-                                                                    class="btn btn-info btn-sm float-left mr-1">
-                                                                    {{ __('common.change_password') }}
-                                                                </a>
+                                                                    {{-- <a href="{{route('user.view.change.pass',$user->id)}}"
+                                                                        class="btn btn-info btn-sm float-left mr-1">
+                                                                        {{ __('common.change_password') }}
+                                                                    </a> --}}    
+                                                                @endif
 
-                                                                @if ($user->role !== 'admin')
+                                                                @if (Auth::user()->role === 'admin')
                                                                     <form action="{{route('users.destroy',$user->id)}}"
                                                                         class="pull-left float-left"
                                                                         method="POST">

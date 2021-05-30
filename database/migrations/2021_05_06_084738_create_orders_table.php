@@ -20,6 +20,9 @@ class CreateOrdersTable extends Migration
             $table->string('email', 100);
             $table->string('address', 100);
             $table->integer('member_id')->unsigned()->nullable();
+            $table->tinyInteger('status')->unsigned()->default(0);
+            $table->dateTime('date_order_end')->nullable();
+            $table->dateTime('date_take_money')->nullable();
             $table->timestamps();
         });
     }

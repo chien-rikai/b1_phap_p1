@@ -17,8 +17,9 @@ SupperMarket | {{ __('common.cart') }}
                         <th>SL No.</th>
                         <th>{{ __('common.product') }}</th>
                         <th>{{ __('common.amount') }}</th>
-                        <th>{{ __('common.name', ['name' => __('common.product')]) }}</th>
+                        <th>{{ __('common.name', ['model' => __('common.product')]) }}</th>
                         <th>{{ __('common.price') }}</th>
+                        <th>{{ __('common.price_promotion') }}</th>
                         <th>{{ __('common.pay') }}</th>
                         <th>{{ __('common.take_out') }}</th>
                     </tr>
@@ -28,14 +29,14 @@ SupperMarket | {{ __('common.cart') }}
 
                         @foreach ($products as $product)
                             @php
-                                $price = ($product[0]['price_promotion'] === 0) ? $product[0]['price_promotion'] : $product[0]['price'];
+                                $price = ($product[0]['price_promotion'] > 0) ? $product[0]['price_promotion'] : $product[0]['price'];
                                 $total += $price * $product[0]['amount'];
                             @endphp
 
                             <tr class="rem" id="{{ $product[0]['id'] }}">
                                 <td class="invert"></td>
                                 <td class="invert-image">
-                                    <a href="">
+                                    <a href="{{ route('site.product', ['slug' => $product[0]['slug']]) }}">
                                         <img src="{{ asset('/storage/projects/detail/'.$product[0]['url_image']) }}" alt="" class="img-responsive">
                                     </a>
                                 </td>
@@ -51,7 +52,10 @@ SupperMarket | {{ __('common.cart') }}
                                 <td class="invert">{{ $product[0]['name'] }}</td>
         
                                 <td class="invert">
-                                    {!! ($product[0]['price_promotion'] === 0) ? '<h4>'.formatCurrencyFrontEnd($product[0]['price_promotion']).' vnđ<span>'.formatCurrencyFrontEnd($product[0]['price']).' vnđ</span></h4>' : '<h4>'.formatCurrencyFrontEnd($product[0]['price']).' vnđ</h4>' !!}
+                                    <h4>{{ formatCurrencyFrontEnd($product[0]['price']).' vnđ' }}</h4>
+                                </td>
+                                <td class="invert">
+                                    <h4>{{ formatCurrencyFrontEnd($product[0]['price_promotion']).' vnđ' }}</h4>
                                 </td>
                                 <td class="invert">
                                     <h5 class="info">{{ formatCurrencyFrontEnd($price * $product[0]['amount']).' vnđ' }}</h5>
@@ -69,12 +73,13 @@ SupperMarket | {{ __('common.cart') }}
                                 <td></td>
                                 <td></td>
                                 <td></td>
+                                <td></td>
                                 <td><h4 class="total-price">{{ formatCurrencyFrontEnd($total) }} vnđ</h4></td>
                                 <td></td>
                             </tr>
                     @else
                             <tr>
-                                <td colspan="7">{{ __('common.no_cart') }}</td>
+                                <td colspan="8">{{ __('common.no_cart') }}</td>
                             </tr>
                     @endif
                 </tbody>

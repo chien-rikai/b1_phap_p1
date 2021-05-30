@@ -33,6 +33,16 @@ function loadStatusUserSelected($params)
     ]);
 }
 
+function loadStatusOrderSelected($params)
+{
+    return view('admin.helpers.selected.status_order')->with([
+        'title' => $params['title'] ?? '',
+        'name' => $params['name'] ?? 'status',
+        'col' => $params['col'] ?? 4
+    ]);
+}
+
+
 function loadContentHeader($params)
 {
     return view('layouts.content.header')->with([
@@ -74,12 +84,12 @@ function getListCategories()
 {
     $category = new Category;
 
-    return $category->select()->orderBy('id', 'DESC')->get();
+    return $category->select(['name', 'slug'])->display()->get();
 }
 
-function formatCurrencyFrontEnd($str)
+function formatCurrencyFrontEnd($str, $decimal = ",", $fraction = ".")
 {
-    $str = number_format($str,"0",",",".");
+    $str = number_format($str,"0",$decimal,$fraction);
     return $str;
 }
 
@@ -93,3 +103,9 @@ function formatCurrencyBackEnd($str)
     return $str;
 }
 
+function fortmatDateFrontend($date)
+{
+    if ($date) {
+        return date('d/m/Y', strtotime($date));
+    }
+}

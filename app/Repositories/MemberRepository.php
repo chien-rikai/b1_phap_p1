@@ -11,4 +11,10 @@ class MemberRepository extends AbstractRepository
         return \App\Models\Member::class;
     }
     
+    public function search($params)
+    {
+        $data = $this->model->select();
+
+        return $data->orderBy('id', 'DESC')->paginate(parent::LIMIT);
+    }
 }

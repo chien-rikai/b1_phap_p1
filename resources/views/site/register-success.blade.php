@@ -9,20 +9,13 @@
 @endsection
 
 @section('content')
-<div class="breadcrumbs">
-    <div class="container">
-        <ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
-            <li><a href="index.html"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Home</a></li>
-            <li class="active">Register Page</li>
-        </ol>
-    </div>
-</div>
+{{ loadBreadCrumbs() }}
 
 <div class="register">
     <div class="container">
-        <h2>Đăng kí thành công</h2>
+        <h2>{{ __('message.success_register') }}</h2>
         <div class="register-home">
-            <a href="{{ route('site.home') }}">Trang chủ</a>
+            <a href="{{ route('site.login') }}">{{ __('common.login') }}</a>
         </div>
     </div>
 </div>

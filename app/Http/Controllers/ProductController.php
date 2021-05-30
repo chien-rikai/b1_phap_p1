@@ -56,7 +56,7 @@ class ProductController extends Controller
     {
         $this->productService->store($request);
 
-        return back();
+        return redirect()->route('products.index');
     }
 
     /**
@@ -100,7 +100,7 @@ class ProductController extends Controller
     {
         $this->productService->update($request, $product);
 
-        return back();
+        return redirect()->route('products.index');
     }
 
     /**
@@ -113,12 +113,12 @@ class ProductController extends Controller
     {
         if (blank($product)) {
             Session::flash('error', __('message.not_found'));
-            return back();
+            return redirect()->route('products.index');
         }
 
         $this->productService->destroy($product);
 
-        return back();
+        return redirect()->route('products.index');
     }
 
     public function import(ValidateImport $request)
@@ -135,6 +135,32 @@ class ProductController extends Controller
         }
 
         Session::flash('success', __('message.success_upload', ['model' => __('common.products')]));
-        return back();
+        return redirect()->route('products.index');
+    }
+
+    public function changeStatus(Product $product)
+    {
+        return $this->productService->changeStatus($product);
+    }
+
+    public function trash()
+    {
+        return view('admin.products.trash')->with([
+            'products' => $this->productService->productRepo->getTrash(),
+        ]);
+    }
+
+    public function restore($id)
+    {
+        $this->productService->productRepo->restore($id);
+
+        return redirect()->route('products.trash'); 
+    }
+
+    public function forceDestroy($id)
+    {
+        $this->productService->productRepo->forceDestroy($id);
+        
+        return redirect()->route('products.trash');
     }
 }

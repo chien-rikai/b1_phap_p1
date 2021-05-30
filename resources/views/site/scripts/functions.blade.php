@@ -1,4 +1,8 @@
 <script>
+$(".auth-rating").on('change', function () {
+    alert("{{ __('message.alert_auth') }}");
+});
+
 $(".rating").on('change', function () {
     $.ajax({
         headers: {
@@ -18,6 +22,14 @@ $(".rating").on('change', function () {
         success: function (res) {
             if (res > 0) {
                 alert("{{ __('message.thank_for_rating') }}");
+
+                $(".rating").removeAttr('checked');
+
+                $(".rating").each(function (index, value) {
+                    if ($(this).val() == res) {
+                        $(this).prop("checked", true);
+                    }
+                });
             }
         },
 

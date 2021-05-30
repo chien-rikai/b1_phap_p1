@@ -28,7 +28,7 @@ class SocialController extends Controller
     public function callback($provider)
     {   
         if ($this->socicalService->handleCallback($provider)) {
-            return redirect()->route('categories.index');
+            return redirect()->route('dashboard');
         }
 
         return redirect()->route('login');

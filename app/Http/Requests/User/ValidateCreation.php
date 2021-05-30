@@ -26,7 +26,7 @@ class ValidateCreation extends FormRequest
     {
         $rules = [
             'name' => ['required', 'max:100'],
-            'email' => ['required', 'email:rfc,dns'],
+            'email' => ['required', 'email:rfc,dns', 'unique:users,email'],
             'password' => ['required'],
             'password_verify' => ['required', 'same:password']
         ];
@@ -46,6 +46,7 @@ class ValidateCreation extends FormRequest
 
             'email.required' =>  __('validation.required', ['attr' => 'Email']),
             'email.email' =>  __('validation.email'),
+            'email.unique' => __('validation.unique', ['attr' => 'Email']),
 
             'password.required' => __('validation.required', ['attr' => __('common.password')]),
             'password_verify.same' => __('validation.same', ['attr' => __('common.password_verify')]),

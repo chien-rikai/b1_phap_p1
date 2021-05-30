@@ -3,11 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;
 
 class Product extends Model
 {
     use HasFactory;
+    use SoftDeletes;
+    use Searchable;
 
     protected $table = 'products';
     protected $fillable = [
@@ -24,8 +28,40 @@ class Product extends Model
         'score_rating',
         'star_rating',
         'category_id',
+        'display'
     ];
+    protected $casts = [
+        'display' => 'boolean',
+    ];
+    
+    protected $dates = ['deleted_at'];
 
+      # ---------- Algolia ---------- #
+      public function isPublished()
+      {
+          return $this->display !== false;
+      }
+  
+      public function shouldBeSearchable()
+      {
+          return $this->isPublished();
+      }
+  
+      public function toSearchableArray()
+      {
+          $products = $this->toArray();
+
+          $products['category_name'] = $this->category->name;
+
+          return $products;
+      }
+  
+      # ---------- Algolia ---------- #
+
+    public function scopeDisplay($query, $order = 'id', $by = 'DESC')
+    {
+        return $query->whereDisplay(true)->orderBy($order, $by);
+    }
     /**
      * Get the user that owns the Product
      *

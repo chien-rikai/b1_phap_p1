@@ -6,14 +6,15 @@ use App\Repositories\CategoryRepository;
 use Illuminate\Http\Request;
 use App\Repositories\ProductRepository;
 use App\Repositories\OrderRepository;
+use Illuminate\Support\Str;
 use Session;
+use App\Models\Product;
 
 class SiteService
 {
     protected $productRepo;
     protected $cateRepo;
     protected $orderRepo;
-
 
     public function __construct(ProductRepository $productRepo,
                                 CategoryRepository $cateRepo,
@@ -36,18 +37,19 @@ class SiteService
     }
 
     public function rating(Request $request)
-    {
-        if ($request->has(['count_rating', 'star_rating', 'star', 'score_rating'])) {
+    {   
+        if ($request->has(['count_rating', 'star', 'score_rating', 'id'])) {
             $params = $request->all([
-                'count_rating', 'star_rating', 'star', 'score_rating'
+                'count_rating', 'id', 'star', 'score_rating'
             ]);
 
             $params['count_rating'] += 1;
-            $params['star_rating'] = ($params['score_rating'] + $params['star']) / ($params['count_rating']);
+            $params['score_rating'] += $params['star'];
+            $params['star_rating'] = round(($params['score_rating']) / ($params['count_rating']));
     
             return $this->productRepo->rating($params);
         }
-
+   
         return 0;
     }
 
@@ -80,7 +82,7 @@ class SiteService
         return 1;
     }
 
-    public function doPayment(Request $request)
+    public function confirm()
     {
         $cart = [];
     
@@ -93,8 +95,28 @@ class SiteService
             ]);
         }
         
-        return $this->orderRepo->payment($request->all([
-            'name', 'phone', 'email', 'address'
-        ]), $cart);
+        $this->orderRepo->payment(Session::get('customer.0'), $cart);
+
+        return;
+    }
+
+    public function doPayment(Request $request)
+    {
+        if (Session::has('customer.0')) {
+            foreach (Session::get('customer.0') as $key => $value) {
+                Session::put('customer.0.'.$key, $request->$key);
+            }
+        } else {
+            Session::push('customer', $request->all([
+                'name', 'phone', 'email', 'address'
+            ]));
+        }
+      
+        return;
+    }
+    
+    public function search($name)
+    {
+        return Product::search($name)->paginate(10);
     }
 }

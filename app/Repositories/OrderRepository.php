@@ -4,10 +4,11 @@ namespace App\Repositories;
 
 use App\Models\Order;
 use DB;
-use App\Mail\OrderMail;
-use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
 use Session;
+use Carbon\Carbon;
+use App\Jobs\SendingEmail;
+use App\Jobs\AnalyticRenuve;
 
 class OrderRepository extends AbstractRepository
 {
@@ -45,23 +46,100 @@ class OrderRepository extends AbstractRepository
 
     public function payment($customer, $cart = [])
     {
-        if (Auth::check()) {
-            array_push($customer, ['member_id' => Auth::user()->id]);
+        if (Auth::guard('site')->check()) {
+            $customer['member_id'] = Auth::guard('site')->user()->id;
         }
-
+        
         DB::beginTransaction();
         try {
             $order = $this->model->create($customer);
             $order->detail_orders()->createMany($cart);
 
             DB::commit();
-            Mail::to($order->email)->send(new OrderMail());
-            Session::forget('cart');
         } catch (Exception $e) {
             DB::rollback();
             Session::flash('error', __('message.payment_error'));
             return $e;
         }
+
+        Session::forget('cart');
+        Session::forget('customer');
+
+        SendingEmail::dispatch($order);
+
+        return;
+    }
+
+    public function clear($id)
+    {
+        $data = $this->model->find($id);
+
+        if (blank($data)) {
+            Session::flash('error', __('message.not_found'));
+        }
+
+        DB::beginTransaction();
+        try {
+            $data->detail_orders()->delete();
+            $data->delete();
+
+            DB::commit();
+            Session::flash('success', __('message.success', ['action' => __('common.destroy'), 'model' => __('common.order')]));
+        } catch (Exception $e) {
+            DB::rollBack();
+            Session::flash('error', __('message.error', ['action' => __('common.destroy'), 'model' => __('common.order')]));
+        }
+
+    }
+
+    public function searchForMember($memberId, $params)
+    {
+        $data = $this->model->whereMemberId($memberId);
+
+        if (!empty($params['status'])) {
+            $data->whereStatus($params['status']);
+        }
+
+        return $data->orderBy('id', 'DESC')->paginate(self::LIMIT);
+    }
+
+    public function forward($id)
+    {
+        $order = $this->model->find($id);
+
+        if (blank($order)) {
+            Session::flash('error', __('message.not_found'));
+        }
+
+        $order->status += 1;
+
+        DB::beginTransaction();
+        try {
+            if ((int) $order->status === 3) {
+                $order->date_order_end = Carbon::now('Asia/Ho_Chi_Minh')->toDateTimeString();
+            }
+    
+            if ((int) $order->status === 4) {
+                $order->date_take_money = Carbon::now('Asia/Ho_Chi_Minh')->toDateTimeString();
+                AnalyticRenuve::dispatch($order)->afterCommit();
+            }
+            
+            $order->save();
+            DB::commit();
+            return $order;
+        } catch (Exception $e) {
+            return $e;
+        }
+
+    }
+
+    public function analyticsStatusOrders()
+    {
+        return $this->model->select('status', DB::raw('count(*) as total'))
+                           ->whereDate('created_at', '>=', Carbon::now('Asia/Ho_Chi_Minh')->subdays(7)->toDateString())
+                           ->groupBy('status')
+                           ->pluck('total','status')
+                           ->all();
     }
 
     public function clear($id)

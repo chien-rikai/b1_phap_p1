@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "suppermarket-analytics",
+  "private_key_id": "59fd9ee5293aadf8289bf8175fc6aadb0f3b20b7",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCtHs08fBx9RKCi\nWq6ArgjOuyCa67eEso9XMMjYhe9IugZAYrmvu0LAIEANCwe+JRliwQfRVKd3T5HU\nzYtBsLFK0xpefIXfkFpfGDNZYCeW+Hy8GpOOAeozSKnW1xvQ84w52HRVAeeZDt2M\n6snRWgnydjd7ouoE59Hi8ZODy5l4fMDqM4t/elu/vxBOq2vBvVg4vt1REXtfUii1\nlXv4HnruWpgAOMrhsvcvl2EjBoA3xHaXgybB66f5kzq6Qd7P6MztmfGS7gsmFQyQ\nJ8rRrZ1MWwQ+b6t4TuSB19y9juKvmwFexDcLg3qcF9E+ow4kXE9C/CcZVRuKj1BI\nQ0Eb2KsjAgMBAAECggEAGT/ZUj2N0C1uuk88jVMUwMYlKsM/aHC8nExmtsHOFQ7g\ns4pSp9FJmoj5no1hyzdQ/QjHUZ4lsK6fx+hUq7eQHCgu++HwiptcuurmLl5qV8gV\nNUAxDjC0TleGQensyiyDYrpxuSZGd5nl8VQbLFgUBFN+ox8vP5jqEU4HpFzRHPPj\noum0PVmQwynmKuV4OgenMTUt7aHIZPm0tDmNH4d8WeRKRAgwfVjh34ho1DrIXF5p\n4ByEUVFGTxXmfxUTkDfyL2ptBdBpURgvH8l8SDyKhVk7/csQmHT6w3VfHVT362xG\nwyHYcs9ckYvLEoCQbU6YeXTlTjjPh9ahp6h58I0fWQKBgQDZ89KL8uoOJjlnsVn/\n82USg58oUfmMGOR95/Fe/akH5p3FUO3D7QFO6QegMPuzDZknUBAFyfR4PFs+j1lC\naWfhRzS1EHTmAtPqzkJ51xqCNWali6Nqe1w8bBx7GgUuYFCTPFBQ9Q0bFLyZeZSS\n8O/WpOaV+ZMnmGzjeJ4Q4y7UmQKBgQDLV3TF4pE8zQwVkixB1oRFGGIOj9+tbG4T\n2IxOw8eN2yr2KbCnD3COg2B8gzoR7LI00T+Po1t7vPH8pnDSksnCCKTVOumMJ/6x\nMQo76/8PGBYDUOSkatWQoAhrTUT5TeEhTFZsK33gIIrOnSyBmvbLgf4xMxdor7/1\npfRyydKXGwKBgEi3ETLB25bW5+YRhI5hPQJdSXdhShmUoH7lKGFhzcgmB9Mx+fGZ\nHAugsXuffAoz6jn0ezQDOf33XRXVK5l9ozvEzu/tyqKGpP88y27s9holCNcIbH/1\nIkPCagokF0Buv9Mvlzg7WaEEXRvzNT+FBO+e2pOEzbSzJPkLX+kQcqpZAoGAJsij\niSrRsNsbNvIOZvBXgiZIbaabbySDSl2/RTaqVTA8XX9OJk8XlNcSDC2rYcfXpaNT\nkD4EMPG05g+I7WD6AnxLlDAMY6MtPPaxkQROPb7GVBOVyJZn7ZHYiT7PrQ1hp0w8\nH52cAKe0UfxAhOfdsqs0pIWuLVV4M45XtZ0xAYkCgYBB2OPrp/B5IGMObwLPXj9P\nQGSIt59qAX2Od+OfRPdhncxkbSqAWz+Amuiun6HkvwfT6LfucWN3CNjkxXuw0d3A\n0IpTRf5qf/j81SSN84ic+Gz8ud6zOXFhfr0k8suzMOXHR+0HE2amvfkh5Eq0ePdy\n0TWQdoRDnBproCzZ7M6SMg==\n-----END PRIVATE KEY-----\n",
+  "client_email": "analytics-api@suppermarket-analytics.iam.gserviceaccount.com",
+  "client_id": "115584708078044045420",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/analytics-api%40suppermarket-analytics.iam.gserviceaccount.com"
+}

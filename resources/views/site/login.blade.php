@@ -1,22 +1,11 @@
 @extends('site.layouts.master')
 
 @section('title')
-    SupperMarket | Danh mục sản phẩm
-@endsection
-
-@section('boostrap')
-
+    SupperMarket | {{ __('common.login') }}
 @endsection
 
 @section('content')
-<div class="breadcrumbs">
-    <div class="container">
-        <ol class="breadcrumb breadcrumb1 animated wow slideInLeft" data-wow-delay=".5s">
-            <li><a href="index.html"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>Home</a></li>
-            <li class="active">Login Page</li>
-        </ol>
-    </div>
-</div>
+{{ loadBreadCrumbs() }}
 
 <div class="login">
     <div class="container">
@@ -46,13 +35,17 @@
                 </div>
                 <input type="submit" value="Login">
             </form>
+
+            {{-- <a href="javascript:void(0)" class="social-login--facebook" onclick="loginFacebook()">
+                <img width="129px" height="37px" alt="facebook-login-button" src="//bizweb.dktcdn.net/assets/admin/images/login/fb-btn.svg">
+            </a>
+
+            <a href="javascript:void(0)" class="social-login--google" onclick="loginGoogle()">
+                <img width="129px" height="37px" alt="google-login-button" src="//bizweb.dktcdn.net/assets/admin/images/login/gp-btn.svg">
+            </a> --}}
         </div>
         <h4>For New People</h4>
         <p><a href="registered.html">Register Here</a> (Or) go back to <a href="index.html">Home<span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a></p>
     </div>
 </div>
-@endsection
-
-@section('script')
- 
 @endsection

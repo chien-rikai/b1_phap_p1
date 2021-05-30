@@ -9,6 +9,9 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ExportController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\SocialController;
+use App\Http\Controllers\MemberController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\AdminController;
 
 
 
@@ -46,16 +49,36 @@ Route::prefix('admin')->group(function () {
 
 
     Route::group(['middleware' => 'login'], function () {
+        Route::get('dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+
         Route::get('user/view/change-pass/{user}', [UserController::class, 'viewChangePass'])->name('user.view.change.pass');
         Route::put('user/change-pass/{id}', [UserController::class, 'changePass'])->name('user.change.pass');
         Route::post('products/import', [ProductController::class, 'import'])->name('products.import');
         Route::get('export/excel/product', [ExportController::class, 'productExcel'])->name('export.excel.product');
         Route::get('export/csv/product', [ExportController::class, 'productCSV'])->name('export.csv.product');
 
+        Route::get('categories/trash', [CategoryController::class, 'trash'])->name('categories.trash');
+        Route::get('categories/restore/{id}', [CategoryController::class, 'restore'])->name('categories.restore');
+        Route::delete('categories/force-destroy/{id}', [CategoryController::class, 'forceDestroy'])->name('categories.force.destroy');
+
+        Route::get('products/trash', [ProductController::class, 'trash'])->name('products.trash');
+        Route::get('products/restore/{id}', [ProductController::class, 'restore'])->name('products.restore');
+        Route::delete('products/force-destroy/{id}', [ProductController::class, 'forceDestroy'])->name('products.force.destroy');
+
+        Route::get('members/{member}/history', [MemberController::class, 'history'])->name('members.history');
+        
+        Route::get('forward-status/{id}', [OrderController::class, 'forward'])->name('forward.status');
+
         Route::resource('products', ProductController::class);
         Route::resource('categories', CategoryController::class);
         Route::resource('users', UserController::class);
+        Route::resource('members', MemberController::class)->only(['index']);
         Route::resource('orders', OrderController::class)->only(['index', 'show', 'destroy']);
+
+        # -------------- XMLRequest ------------------ #
+        Route::get('/change/product/status/{product}', [ProductController::class, 'changeStatus']);
+        Route::get('/change/category/status/{id}', [CategoryController::class, 'changeStatus']);
+        
     });
 });
 
@@ -81,6 +104,8 @@ Route::prefix('/')->group(function () {
     Route::get('/cart', [SiteController::class, 'cart'])->name('cart');
     Route::get('/payment', [SiteController::class, 'payment'])->name('payment');
     Route::post('/do-payment', [SiteController::class, 'doPayment'])->name('do.payment');
+    Route::get('/confirm-payment', [SiteController::class, 'confirmPayment'])->name('confirm.payment');
+    Route::get('/confirm', [SiteController::class, 'confirm'])->name('confirm');
     Route::get('/payment/success', [SiteController::class, 'paymentSuccess'])->name('site.payment.success');
     Route::get('/collection/{slug?}', [SiteController::class, 'collection'])->name('site.collection');
     Route::get('/product/{slug}', [SiteController::class, 'product'])->name('site.product');
