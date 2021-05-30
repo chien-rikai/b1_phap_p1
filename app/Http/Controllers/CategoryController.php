@@ -55,7 +55,7 @@ class CategoryController extends Controller
     {
         $params = [
             'name' => $request->input('name'), 
-            'slug' => Str::slug($params['name'])
+            'slug' => Str::slug($request->name)
         ];
 
         $category = $this->categoryRepo->create($params);
@@ -109,7 +109,7 @@ class CategoryController extends Controller
     {
         $params = [
             'name' => $request->input('name'), 
-            'slug' => Str::slug($params['name'])
+            'slug' => Str::slug($request->name)
         ];
 
         $updation = $this->categoryRepo->update($id, $params);

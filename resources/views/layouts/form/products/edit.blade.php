@@ -29,7 +29,7 @@
                     <div class="form-group">
                         <label for="name">{{ __('common.price') }} {!!'<span class="required-alert">*</span>'!!}</label>
                         <input type="text" class="form-control {{ $errors->has('price') ? 'is-invalid' : ''}}"
-                            name="price" value="{{ old('price', $product->price) }}" id="name">
+                            name="price" value="{{ formatCurrencyFrontEnd(old('price', $product->price)) }}" id="name">
                         @if ($errors->has('price'))
                             <span id="exampleInputPassword1-error" class="error invalid-feedback">{{ $errors->first('price') }}</span>
                         @endif
@@ -40,7 +40,7 @@
                     <div class="form-group">
                         <label for="name">{{ __('common.price_promotion') }}</label>
                         <input type="text" class="form-control {{ $errors->has('price_promotion') ? 'is-invalid' : ''}}"
-                            name="price_promotion" value="{{ old('price_promotion', $product->price_promotion) }}" id="name">
+                            name="price_promotion" value="{{ formatCurrencyFrontEnd(old('price_promotion', $product->price_promotion)) }}" id="name">
                         @if ($errors->has('price_promotion'))
                             <span id="exampleInputPassword1-error" class="error invalid-feedback">{{ $errors->first('price_promotion') }}</span>
                         @endif

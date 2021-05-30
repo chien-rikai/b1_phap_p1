@@ -6,9 +6,9 @@ $(".rating").on('change', function () {
         },
         type: 'POST',
         data: {
-            id: "{{ $product->id }}",
-            count_rating: $("#product-rating").data("count_rating"),
-            score_rating: $("#product-rating").data("score_rating"),
+            id: $("#product-rating").data("product-id"),
+            count_rating: $("#product-rating").data("count"),
+            score_rating: $("#product-rating").data("score"),
             star: $(this).val(),
         },
         dataType: 'json',

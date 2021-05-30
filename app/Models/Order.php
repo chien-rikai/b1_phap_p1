@@ -15,6 +15,7 @@ class Order extends Model
         'phone',
         'address',
         'email',
+        'status',
         'member_id'
     ];
 

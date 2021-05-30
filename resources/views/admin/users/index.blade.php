@@ -94,6 +94,14 @@
                                                     </th>
                                                     <th class="" tabindex="0" aria-controls="example1"
                                                         rowspan="1" colspan="1">
+                                                        {{ __('table.status') }}
+                                                    </th>
+                                                    <th class="" tabindex="0" aria-controls="example1"
+                                                        rowspan="1" colspan="1">
+                                                        {{ __('table.role') }}
+                                                    </th>
+                                                    <th class="" tabindex="0" aria-controls="example1"
+                                                        rowspan="1" colspan="1">
                                                         {{ __('table.action') }}
                                                     </th>
                                                 </tr>
@@ -108,6 +116,8 @@
                                                                 alt="" style="width: 100px" height="100px">
                                                             </td>
                                                             <td>{{ $user->email }}</td>
+                                                            <td>{{ ($user->status == 1) ? __('common.active') : __('common.block') }}</td>
+                                                            <td>{{ $user->role }}</td>
 
                                                             <td>
                                                                 <a href="{{route('users.edit',$user->id)}}"
@@ -120,15 +130,17 @@
                                                                     {{ __('common.change_password') }}
                                                                 </a>
 
-                                                                <form action="{{route('users.destroy',$user->id)}}"
-                                                                    class="pull-left float-left"
-                                                                    method="POST">
-                                                                    @csrf
-                                                                    @method('DELETE')
-                                                                    <button type="submit" class="btn btn-sm btn-danger btn-icon btn-delete">
-                                                                        {{ __('common.destroy') }}
-                                                                    </button>
-                                                                </form>
+                                                                @if ($user->role !== 'admin')
+                                                                    <form action="{{route('users.destroy',$user->id)}}"
+                                                                        class="pull-left float-left"
+                                                                        method="POST">
+                                                                        @csrf
+                                                                        @method('DELETE')
+                                                                        <button type="submit" class="btn btn-sm btn-danger btn-icon btn-delete">
+                                                                            {{ __('common.destroy') }}
+                                                                        </button>
+                                                                    </form>
+                                                                @endif
                                                             </td>
                                                         </tr>
                                                     @endforeach
