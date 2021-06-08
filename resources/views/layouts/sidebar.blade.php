@@ -38,7 +38,7 @@
 
                 <!-- Add icons to the links using the .nav-icon class
        with font-awesome or any other icon font library -->
-                <li class="nav-header">Quản lý người dùng</li>
+                <li class="nav-header">{{ __('common.manager_user') }}</li>
 
                 {{-- <li class="nav-item">
                     <a href="#" class="nav-link">
@@ -64,13 +64,13 @@
                     </ul>
                 </li> --}}
 
-                <li class="nav-header">Quản lý chung</li>
+                <li class="nav-header">{{ __('common.manager_general') }}</li>
 
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon far fa-plus-square"></i>
                         <p>
-                            Danh mục sản phẩm
+                            {{ __('common.category') }}
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
@@ -78,13 +78,13 @@
                         <li class="nav-item">
                             <a href="{{ route('categories.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Danh sách</p>
+                                <p>{{ __('common.index') }}</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('categories.create') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Thêm mới</p>
+                                <p>{{ __('common.store') }}</p>
                             </a>
                         </li>
                     </ul>

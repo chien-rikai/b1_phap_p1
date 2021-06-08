@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Repositories\CategoryRepository;
+use App\Http\Requests\Category\ValidateCreation as CategoryCreate;
+use App\Http\Requests\Category\ValidateUpdation as CategoryUpdate;
 use Session;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\App;
 
 class CategoryController extends Controller
 {
@@ -24,7 +26,9 @@ class CategoryController extends Controller
      */
     public function index(Request $request)
     {
-        $params = $request->all();
+        $params = [
+            'name' => $request->input('name'), 
+        ];
 
         $categories = $this->categoryRepo->search($params);
 
@@ -47,10 +51,12 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoryCreate $request)
     {
-        $params = $request->all();
-        $params['slug'] = Str::slug($params['name']);
+        $params = [
+            'name' => $request->input('name'), 
+            'slug' => Str::slug($params['name'])
+        ];
 
         $category = $this->categoryRepo->create($params);
 
@@ -99,11 +105,12 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CategoryUpdate $request, $id)
     {
-        $params = $request->all();
-        unset($params['_token'], $params['_method']);
-        $params['slug'] = Str::slug($params['name']);
+        $params = [
+            'name' => $request->input('name'), 
+            'slug' => Str::slug($params['name'])
+        ];
 
         $updation = $this->categoryRepo->update($id, $params);
 
