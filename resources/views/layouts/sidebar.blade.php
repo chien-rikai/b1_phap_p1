@@ -11,10 +11,11 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="{{ asset('admin/dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
+                <img src="{{ (Auth::user()->url_image) ? asset('/storage/users/avatar/'.Auth::user()->url_image) : asset('admin/default-user.jpg') }}" 
+                    class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">Alexander Pierce</a>
+                <a href="#" class="d-block">{{ Auth::user()->name }}</a>
             </div>
         </div>
 
@@ -40,11 +41,11 @@
        with font-awesome or any other icon font library -->
                 <li class="nav-header">{{ __('common.manager_user') }}</li>
 
-                {{-- <li class="nav-item">
+                <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon far fa-plus-square"></i>
                         <p>
-                            Quản trị viên
+                            {{ __('common.user') }}
                             <i class="fas fa-angle-left right"></i>
                         </p>
                     </a>
@@ -52,17 +53,17 @@
                         <li class="nav-item">
                             <a href="{{ route('users.index') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Danh sách</p>
+                                <p>{{ __('common.index') }}</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="{{ route('users.create') }}" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>Thêm mới</p>
+                                <p>{{ __('common.store') }}</p>
                             </a>
                         </li>
                     </ul>
-                </li> --}}
+                </li>
 
                 <li class="nav-header">{{ __('common.manager_general') }}</li>
 

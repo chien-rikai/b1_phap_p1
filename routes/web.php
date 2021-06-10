@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\AuthController;
 
@@ -32,6 +33,10 @@ Route::prefix('admin')->group(function () {
 
 
     Route::group(['middleware' => 'login'], function () {
+        Route::get('user/view/change-pass/{user}', [UserController::class, 'viewChangePass'])->name('user.view.change.pass');
+        Route::put('user/change-pass/{id}', [UserController::class, 'changePass'])->name('user.change.pass');
+        
         Route::resource('categories', CategoryController::class);
+        Route::resource('users', UserController::class);
     });
 });
