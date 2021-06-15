@@ -10,6 +10,9 @@ return [
 
     'category' => 'Danh mục sản phẩm',
     'user' => 'Quản trị viên',
+    'product' => 'Sản phẩm',
+    'products' => 'Danh sách sản phẩm',
+    'url_image' => 'Hình ảnh tải lên',
 
     'store' => 'Thêm mới',
     'index' => 'Danh sách',
@@ -28,5 +31,14 @@ return [
     'password_confirm' => 'Nhập lại mật khẩu không khớp',
     'change_password' => 'Đổi mật khẩu',
     'place_password' => 'Nhập mật khẩu',
-    'place_password_confirm' => 'Nhập lại mật khẩu'
+    'place_password_confirm' => 'Nhập lại mật khẩu',
+    'price' => 'Đơn giá',
+    'price_promotion' => 'Giá khuyến mãi',
+    'view' => 'Lượt xem',
+    'star_rating' => 'Điểm đánh giá',
+    "name" => "Tên :model",
+    'description' => 'Mô tả',
+    "avatar" => 'Hình ảnh đại diện',
+    'stock' => 'Số lượng trong kho',
+    'upload' => 'File tải lên'
 ];

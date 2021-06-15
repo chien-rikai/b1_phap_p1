@@ -6,4 +6,5 @@ return [
     "email" => 'Email',
     "action" => 'Thao tác',
     "no_data" => "Không có dữ liệu để hiển thị",
+    "more_info" => 'Thông tin thêm'
 ];

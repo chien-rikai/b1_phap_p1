@@ -9,4 +9,6 @@ return [
     'verify_code' => 'Mã xác nhận không đúng hoặc đã hết hạn. Vui lòng thử lại !',
     'same' => ':attr không khớp',
     'image' => 'Hình ảnh tải lên không đúng định dạng cho phép !',
+    'regex' => ':attr không đúng định dạng hợp lệ !',
+    'mimes' => 'File không đúng định dạng cho phép !',
 ];

@@ -4,7 +4,7 @@ namespace App\Services;
 
 use App\Traits\ImageResize;
 use App\Repositories\UserRepository;
-use Session, File;
+use Session;
 use Illuminate\Support\Str;
 
 class UserService 
@@ -12,8 +12,7 @@ class UserService
     use ImageResize;
 
     public $userRepo;
-    public $imageRepo;
-
+    
     public function __construct(UserRepository $userRepo)
     {
         $this->userRepo = $userRepo;
@@ -42,7 +41,7 @@ class UserService
         if (blank($user)) {
             Session::flash('error', __('message.error', ['action' => __('common.store'), 'model' => __('common.user')]));
         } else {
-            Session::flash('error', __('message.error', ['action' => __('common.store'), 'model' => __('common.user')]));
+            Session::flash('error', __('message.success', ['action' => __('common.store'), 'model' => __('common.user')]));
         }
 
         return;

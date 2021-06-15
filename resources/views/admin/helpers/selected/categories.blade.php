@@ -1,14 +1,5 @@
-@php
-    $required = false;
-    $isDisabled  = false;
-    $col = $col ?? 4;
-    $category_id = old('category_id') ?? $category_id ?? null;
-    $categories = $categories ?? null;
-
-@endphp
-
 <div class="col-lg-{{$col}}">
-    <label for="sel1" class="font-weight-semibold">Danh mục @if($required){!!'<span class="required-alert">*</span>' !!} @endif</label>
+    <label for="sel1" class="font-weight-semibold">{{ __('common.category') }} {!! ($required) ? '<span class="required-alert">*</span>' : '' !!} </label>
 
     <select class="form-control select2" id="category_id" name="category_id"
             {{ ($required) ? 'required' : '' }}
@@ -18,7 +9,7 @@
         >
         @if(isset($categories))
             <option value="">
-                Chọn Danh mục
+                {{ __('common.category') }}
             </option>
             @foreach($categories as $key => $value)
                 <option value="{{$value->id}}" {{ ($value->id == $category_id) ? 'selected="selected"' : '' }}>
@@ -27,13 +18,10 @@
             @endforeach
         @else
             <option value="">
-                Chọn Danh mục
+                {{ __('common.category') }}
             </option>
         @endif
     </select>
 
 </div>
 
-<script>
-    $('.select2').select2();
-</script>
