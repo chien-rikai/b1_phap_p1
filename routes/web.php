@@ -6,6 +6,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ExportController;
+
 
 
 /*
@@ -37,6 +39,8 @@ Route::prefix('admin')->group(function () {
         Route::get('user/view/change-pass/{user}', [UserController::class, 'viewChangePass'])->name('user.view.change.pass');
         Route::put('user/change-pass/{id}', [UserController::class, 'changePass'])->name('user.change.pass');
         Route::post('products/import', [ProductController::class, 'import'])->name('products.import');
+        Route::get('export/excel/product', [ExportController::class, 'productExcel'])->name('export.excel.product');
+        Route::get('export/csv/product', [ExportController::class, 'productCSV'])->name('export.csv.product');
 
         Route::resource('products', ProductController::class);
         Route::resource('categories', CategoryController::class);

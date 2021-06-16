@@ -24,7 +24,7 @@ class ValidateImport extends FormRequest
     public function rules()
     {
         $rules = [
-            'upload' => ['required', 'mimes:csv,xlsx,xls'],
+            'upload' => ['required', 'mimes:csv,txt,xlsx,xls'],
         ];
 
         return $rules;

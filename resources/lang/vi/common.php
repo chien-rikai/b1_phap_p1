@@ -9,6 +9,7 @@ return [
     'save' => 'Lưu',
 
     'category' => 'Danh mục sản phẩm',
+    'category_id' => 'Mã danh mục sản phẩm',
     'user' => 'Quản trị viên',
     'product' => 'Sản phẩm',
     'products' => 'Danh sách sản phẩm',
@@ -40,5 +41,6 @@ return [
     'description' => 'Mô tả',
     "avatar" => 'Hình ảnh đại diện',
     'stock' => 'Số lượng trong kho',
-    'upload' => 'File tải lên'
+    'upload' => 'File tải lên',
+    'file_bieu_mau_san_pham' => 'file-bieu-mau-them-moi-san-pham',
 ];

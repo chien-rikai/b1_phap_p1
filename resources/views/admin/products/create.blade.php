@@ -60,7 +60,24 @@
                     <!-- /.card -->
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Upload {{ __('common.index').' '.__('common.product') }}</h3>
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <h3 class="card-title">Upload {{ __('common.index').' '.__('common.product') }}</h3>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="btn-group float-right">
+                                        <button type="button" class="btn btn-success">Tải biểu mẫu</button>
+                                        <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                          <span class="sr-only">Toggle Dropdown</span>
+                                        </button>
+                                        <div class="dropdown-menu" role="menu" style="">
+                                          <a class="dropdown-item" href="{{ route('export.excel.product') }}">Excel</a>
+                                          <a class="dropdown-item" href="{{ route('export.csv.product') }}">CSV</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <!-- /.card-header -->
                         @include('layouts.form.products.import')

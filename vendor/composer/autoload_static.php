@@ -636,6 +636,7 @@ class ComposerStaticIniteae9cf6ed5d75c4ccdf7eaa1fd16ac9f
         'App\\Http\\Requests\\User\\ValidateChangePass' => __DIR__ . '/../..' . '/app/Http/Requests/User/ValidateChangePass.php',
         'App\\Http\\Requests\\User\\ValidateCreation' => __DIR__ . '/../..' . '/app/Http/Requests/User/ValidateCreation.php',
         'App\\Http\\Requests\\User\\ValidateUpdation' => __DIR__ . '/../..' . '/app/Http/Requests/User/ValidateUpdation.php',
+        'App\\Imports\\ProductImport' => __DIR__ . '/../..' . '/app/Imports/ProductImport.php',
         'App\\Mail\\SendCode' => __DIR__ . '/../..' . '/app/Mail/SendCode.php',
         'App\\Models\\Category' => __DIR__ . '/../..' . '/app/Models/Category.php',
         'App\\Models\\Product' => __DIR__ . '/../..' . '/app/Models/Product.php',
