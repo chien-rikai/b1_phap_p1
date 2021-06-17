@@ -70,4 +70,14 @@ class ProductRepository extends AbstractRepository
             ['star_rating' => $params['star_rating']]
         ]);
     }
+
+    public function getHotProducts()
+    {
+        return $this->model->orderBy('view', 'DESC')->limit(4)->get();
+    }
+
+    public function getSaleProducts()
+    {
+        return $this->model->where('price_promotion', '<>', 0)->orderBy('id', 'DESC')->limit(4)->get();
+    }
 }

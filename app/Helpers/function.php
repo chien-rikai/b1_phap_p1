@@ -1,6 +1,8 @@
 <?php
 
 use App\Models\Category;
+use App\Models\Product;
+
 
 function loadSortSelected($params)
 {
@@ -27,6 +29,25 @@ function loadContentHeader($params)
     return view('layouts.content.header')->with([
         'home' => $params['home'],
         'action' => $params['action']
+    ]);
+}
+function loadBreadCrumbs()
+{
+    return view('site.layouts.breadcrumbs');
+}
+
+function loadSuggest($params)
+{
+    return view('site.layouts.suggest')->with([
+        'products' => $params['products'],
+        'title' => $params['title'],
+    ]);
+}
+
+function loadFormForCart(Product $product)
+{
+    return view('site.layouts.form-cart')->with([
+        'product' => $product
     ]);
 }
 

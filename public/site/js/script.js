@@ -1,31 +1,3 @@
-<script>
-$(".rating").on('change', function () {
-    $.ajax({
-        headers: {
-            'X-CSRF-TOKEN': "{{ csrf_token() }}"
-        },
-        type: 'POST',
-        data: {
-            id: "{{ $product->id }}",
-            count_rating: $("#product-rating").data("count_rating"),
-            score_rating: $("#product-rating").data("score_rating"),
-            star: $(this).val(),
-        },
-        dataType: 'json',
-        cache: false,
-        url: "{{ route('rating') }}",
-
-        success: function (res) {
-            if (res > 0) {
-                alert("{{ __('message.thank_for_rating') }}");
-            }
-        },
-
-        error: function (error) {
-            alert("{{ __('message.something_went_wrong') }}");
-        }
-    });
-});
 
 $(".add-to-cart").on('click', function (e) {
     e.preventDefault();
@@ -54,12 +26,12 @@ $(".add-to-cart").on('click', function (e) {
         url: "{{ route('add.to.cart') }}",
         success: function (res) {
             if (res > 0) {
-                alert("{{ __('message.cart_success') }}");
+                alert("Sản phẩm đã được thêm vào giỏ hàng !");
             }
         },
 
         error: function (error) {
-            alert("{{ __('message.something_went_wrong') }}");
+            alert("Có lỗi xảy ra");
         }
     });
 });
@@ -90,7 +62,7 @@ $('.close1').on('click', function (e) {
         },
 
         error: function (error) {
-            alert("{{ __('message.something_went_wrong') }}");
+            alert("Có lỗi xảy ra");
         }
     });
 });
@@ -122,7 +94,7 @@ $('#update-cart').on('click', function (e) {
         },
 
         error: function (error) {
-            alert("{{ __('message.something_went_wrong') }}");
+            alert("Có lỗi xảy ra");
         }
     });
 });
@@ -139,5 +111,3 @@ $('.value-minus').on('click', function () {
     if (newVal >= 1) divUpd.text(newVal);
 });
 
-
-</script>
