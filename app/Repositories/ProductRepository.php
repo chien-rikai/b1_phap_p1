@@ -45,4 +45,39 @@ class ProductRepository extends AbstractRepository
                     ->paginate(parent::LIMIT);
     }
 
+    public function getListProductsBySlugCate($slug, $limit = 4)
+    {
+        return $this->model->whereHas('category', function ($query) use ($slug) {
+            $query->whereSlug($slug);
+        })->orderBy('id','DESC')->paginate($limit);
+    }
+
+    public function getProductBySlug($slug)
+    {
+        return $this->model->whereSlug($slug)->first();
+    }
+
+    public function incrementView($id)
+    {
+        return $this->model->whereId($id)->increment('view');
+    }
+
+    public function rating($params)
+    {
+        return $this->model->whereId('id', $params['id'])->update([
+            ['count_rating' => $params['count_rating']],
+            ['score_rating' => $params['score_rating']],
+            ['star_rating' => $params['star_rating']]
+        ]);
+    }
+
+    public function getHotProducts()
+    {
+        return $this->model->orderBy('view', 'DESC')->limit(4)->get();
+    }
+
+    public function getSaleProducts()
+    {
+        return $this->model->where('price_promotion', '<>', 0)->orderBy('id', 'DESC')->limit(4)->get();
+    }
 }

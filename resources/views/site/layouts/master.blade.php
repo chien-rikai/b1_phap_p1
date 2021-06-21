@@ -54,7 +54,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
     </script>
     <!-- start-smoth-scrolling -->
-    @yield('bootsrap')
+
+    <link href="{{ asset('site/css/custom.css') }}" rel="stylesheet">
+
 </head>
 
 <body>
@@ -113,6 +115,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <!-- main slider-banner -->
     <script src="{{ asset('site/js/skdslider.min.js') }}"></script>
     <link href="{{ asset('site/css/skdslider.css') }}" rel="stylesheet">
+    
     <script type="text/javascript">
         jQuery(document).ready(function () {
             jQuery('#demo1').skdslider({
@@ -133,7 +136,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     </script>
     <!-- //main slider-banner -->
 
-    @yield('script')
+    
+    {{-- <script type="text/javascript" src="{{ asset('site/js/script.js') }}"></script> --}}
+    @include('site.scripts.functions')
 </body>
 
 </html>

@@ -7,6 +7,7 @@ return [
     'home' => 'Trang chủ',
     'back' => 'Quay lại',
     'save' => 'Lưu',
+    'amount' => 'Số lượng',
 
     'category' => 'Danh mục sản phẩm',
     'category_id' => 'Mã danh mục sản phẩm',
@@ -43,4 +44,18 @@ return [
     'stock' => 'Số lượng trong kho',
     'upload' => 'File tải lên',
     'file_bieu_mau_san_pham' => 'file-bieu-mau-them-moi-san-pham',
+
+    'add_to_cart' => 'Thêm vào giỏ hàng',
+    'home' => 'Trang chủ',
+    'new_product' => 'Sản phẩm mới',
+    'hot_product' => 'Sản phẩm được quan tâm',
+    'sale_product' => 'Sản phẩm khuyến mãi',
+    'cart' => 'Giỏ hàng',
+    'count_cart' => 'Giỏ hàng hiện tại của bạn có : ',
+    'pay' => 'Thành tiền',
+    'payment' => 'Thanh toán',
+    'take_out' => 'Lấy ra',
+    'update_to_cart' => 'Cập nhật giỏ hàng',
+    'related_products' => 'Sản phẩm liên quan',
+    'detail_product' => 'Chi tiết sản phẩm',
 ];

@@ -76,9 +76,9 @@ abstract class AbstractRepository
         );
     }
 
-    public function getListDESC()
+    public function getListDESC($limit = self::LIMIT)
     {
-        return $this->model->orderBy('id', 'DESC')->get();
+        return $this->model->orderBy('id', 'DESC')->limit($limit)->get();
     }
 
     public function getListByArrIds($params)

@@ -7,8 +7,7 @@ use App\Http\Controllers\SettingController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ExportController;
-
-
+use App\Http\Controllers\SiteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +19,7 @@ use App\Http\Controllers\ExportController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 
 Route::get('/locale/{locale}', [SettingController::class, 'locale'])->name('setting.locale');
 
@@ -46,4 +46,18 @@ Route::prefix('admin')->group(function () {
         Route::resource('categories', CategoryController::class);
         Route::resource('users', UserController::class);
     });
+});
+
+Route::prefix('/')->group(function () {
+    Route::get('/', [SiteController::class, 'home'])->name('site.home');
+    Route::get('/cart', [SiteController::class, 'cart'])->name('cart');
+    Route::post('/payment', [SiteController::class, 'payment'])->name('payment');
+    Route::get('/{slugCate}/{slug?}', [SiteController::class, 'detail'])->name('site.detail');
+});
+
+Route::prefix('/ajax')->group(function () {
+    Route::post('/rating', [SiteController::class, 'rating'])->name('rating');
+    Route::post('/add-to-cart', [SiteController::class, 'addToCart'])->name('add.to.cart');
+    Route::post('/update-cart', [SiteController::class, 'updateCart'])->name('update.cart');
+    Route::get('/remove-out-cart/{id}', [SiteController::class, 'removeOutCart'])->name('remove.out.cart');
 });
