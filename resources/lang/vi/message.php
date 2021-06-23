@@ -12,4 +12,6 @@ return [
     'thank_for_rating' => 'Cảm ơn bạn đã đánh giá sản phẩm !',
     'something_went_wrong' => 'Có lỗi phát sinh, vui lòng thử lại !',
     'cart_success' => 'Sản phẩm đã được thêm vào giỏ hàng !',
+    'payment_success' => 'Thanh toán thành công, cảm ơn quý khách đã mua hàng !',
+    'payment_error' => 'Xảy ra lỗi trong quá trình thanh toán, vui lòng thử lại !'
 ];

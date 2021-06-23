@@ -28,8 +28,18 @@ class UserService
         if (isset($params['url_image'])){
             $filename = Str::slug($params['name']) . time() . '.' . $params['url_image']->getClientOriginalExtension();
 
-            $imageAvatar = $this->uploadImage($params['url_image'], $filename, 'users/avatar', 100, 100, 1, 100);
-            $imageDisplay = $this->uploadImage($params['url_image'], $filename, 'users/display', 200, 200, 1, 100);
+            $imageAvatar = $this->uploadImage($params['url_image'], $filename, 'users/avatar', [
+                'sizeX' => 100, 
+                'sizeY' => 100, 
+                'status' => 1, 
+                'quality' => 100
+            ]);
+            $imageDisplay = $this->uploadImage($params['url_image'], $filename, 'users/display', [
+                'sizeX' => 200, 
+                'sizeY' => 200, 
+                'status' => 1, 
+                'quality' => 100
+            ]);
             
             if (isset($imageAvatar) && isset($imageDisplay)) {
                 $params['url_image'] = $filename;
@@ -52,8 +62,18 @@ class UserService
         if (isset($params['url_image'])){
             $filename = Str::slug($params['name']) . time() . '.' . $params['url_image']->getClientOriginalExtension();
       
-            $imageAvatar = $this->uploadImage($params['url_image'], $filename, 'users/avatar', 100, 100, 1, 100);
-            $imageDisplay = $this->uploadImage($params['url_image'], $filename, 'users/display', 200, 200, 1, 100);
+            $imageAvatar = $this->uploadImage($params['url_image'], $filename, 'users/avatar', [
+                'sizeX' => 100, 
+                'sizeY' => 100, 
+                'status' => 1, 
+                'quality' => 100
+            ]);
+            $imageDisplay = $this->uploadImage($params['url_image'], $filename, 'users/display', [
+                'sizeX' => 200, 
+                'sizeY' => 200, 
+                'status' => 1, 
+                'quality' => 100
+            ]);
 
             if (isset($imageAvatar) && isset($imageDisplay)) {
                 $user = $this->userRepo->getById($id);

@@ -5,18 +5,23 @@ namespace App\Services;
 use App\Repositories\CategoryRepository;
 use Illuminate\Http\Request;
 use App\Repositories\ProductRepository;
+use App\Repositories\OrderRepository;
 use Session;
 
 class SiteService
 {
     protected $productRepo;
     protected $cateRepo;
+    protected $orderRepo;
+
 
     public function __construct(ProductRepository $productRepo,
-                                CategoryRepository $cateRepo)
+                                CategoryRepository $cateRepo,
+                                OrderRepository $orderRepo)
     {
         $this->productRepo = $productRepo;
         $this->cateRepo = $cateRepo;
+        $this->orderRepo = $orderRepo;
     }
 
     public function rating(Request $request)
@@ -62,5 +67,23 @@ class SiteService
         }
 
         return 1;
+    }
+
+    public function doPayment(Request $request)
+    {
+        $cart = [];
+    
+        foreach (Session::get('cart') as $key => $value) {
+            array_push($cart, [
+                'product_id' => $value[0]['id'],
+                'price_base' => $value[0]['price'],
+                'price_promotion' => $value[0]['price_promotion'],
+                'amount' => $value[0]['amount']
+            ]);
+        }
+        
+        return $this->orderRepo->payment($request->all([
+            'name', 'phone', 'email', 'address'
+        ]), $cart);
     }
 }
