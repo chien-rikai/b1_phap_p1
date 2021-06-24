@@ -4,6 +4,8 @@ namespace App\Repositories;
 
 use App\Models\Order;
 use DB;
+use App\Mail\OrderMail;
+use Illuminate\Support\Facades\Mail;
 use Session;
 
 class OrderRepository extends AbstractRepository
@@ -21,10 +23,12 @@ class OrderRepository extends AbstractRepository
             $order->detail_orders()->createMany($cart);
 
             DB::commit();
-            Session::flash('success', __('message.payment_success'));
+            Mail::to($order->email)->send(new OrderMail());
+            Session::forget('cart');
         } catch (Exception $e) {
             DB::rollback();
             Session::flash('error', __('message.payment_error'));
+            return $e;
         }
     }
 }

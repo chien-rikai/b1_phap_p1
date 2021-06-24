@@ -62,5 +62,6 @@ return [
     'address' => 'Địa chỉ',
     'phone' => 'Số điện thoại',
     'email' => 'Địa chỉ Email',
-    'name_custom' => 'Tên khách hàng'
+    'name_custom' => 'Tên khách hàng',
+    'no_cart' => 'Không có sản phẩm nào trong giỏ hàng !'
 ];

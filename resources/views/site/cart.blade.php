@@ -72,6 +72,10 @@ SupperMarket | {{ __('common.cart') }}
                                 <td><h4 class="total-price">{{ formatCurrencyFrontEnd($total) }} vnđ</h4></td>
                                 <td></td>
                             </tr>
+                    @else
+                            <tr>
+                                <td colspan="7">{{ __('common.no_cart') }}</td>
+                            </tr>
                     @endif
                 </tbody>
             </table>
