@@ -6,5 +6,8 @@ return [
     "email" => 'Email',
     "action" => 'Thao tác',
     "no_data" => "Không có dữ liệu để hiển thị",
-    "more_info" => 'Thông tin thêm'
+    "more_info" => 'Thông tin thêm',
+    "status" => 'Trạng thái',
+    "role" => 'Cấp bậc',
+    "status_display" => 'Trạng thái hiển thị',
 ];

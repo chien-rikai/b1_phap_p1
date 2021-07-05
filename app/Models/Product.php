@@ -3,11 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
     protected $table = 'products';
     protected $fillable = [
@@ -24,8 +26,13 @@ class Product extends Model
         'score_rating',
         'star_rating',
         'category_id',
+        'display'
     ];
-
+    protected $casts = [
+        'display' => 'boolean',
+    ];
+    
+    protected $dates = ['deleted_at'];
     /**
      * Get the user that owns the Product
      *

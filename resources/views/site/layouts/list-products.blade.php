@@ -15,7 +15,7 @@
                                 <figure>
                                     <div class="snipcart-item block">
                                         <div class="snipcart-thumb">
-                                            <a href="{{ route('site.detail', ['slugCate' => $product->category->slug, 'slug' => $product->slug]) }}">
+                                            <a href="{{ route('site.product', ['slug' => $product->slug]) }}">
                                                 <img title="" alt="" src="{{ asset('/storage/projects/display/'.$product->url_image) }}">
                                             </a>
                                             <p>{{ $product->name }}</p>

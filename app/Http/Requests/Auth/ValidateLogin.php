@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\BlockUser;
 
 class ValidateLogin extends FormRequest
 {
@@ -24,7 +25,7 @@ class ValidateLogin extends FormRequest
     public function rules()
     {
         $rules = [
-            'email' => ['required', 'email:filter', 'max:100'],
+            'email' => ['required', 'email:filter', 'max:100', new BlockUser()],
             'password' => ['required', 'max:100']
         ];
 
@@ -34,12 +35,12 @@ class ValidateLogin extends FormRequest
     public function messages()
     {
         $messages = [
-            'email.required' => 'Email không được để trống',
-            'email.email' => 'Email không đúng định dạng cho phép',
-            'email.max' => 'Không được quá 100 kí tự',
+            'email.required' =>  __('validation.required', ['attr' => 'Email']),
+            'email.email' =>  __('validation.email'),
+            'email.max' => __('validation.max', ['attr' => 'Email', 'max' => '100']),
 
-            'password.required' => 'Mật khẩu không được bỏ trống',
-            'password.max' => 'Không được quá 100 kí tự',
+            'password.required' => __('validation.required', ['attr' => __('common.password')]),
+            'password.max' => __('validation.max', ['attr' => __('common.password'), 'max' => '100']),
         ];
 
         return $messages;

@@ -26,8 +26,10 @@ class CreateProductsTable extends Migration
             $table->integer('count_rating')->unsigned()->nullable()->default(1);
             $table->integer('score_rating')->unsigned()->nullable()->default(3);
             $table->tinyInteger('star_rating')->unsigned()->nullable()->default(3);
-            $table->tinyInteger('category_id')->unsigned();
+            $table->integer('category_id')->unsigned();
+            $table->tinyInteger('display')->default(1);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

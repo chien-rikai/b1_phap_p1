@@ -25,7 +25,7 @@
                                             @if (!blank(getListCategories()))
                                                 @foreach (getListCategories() as $category)
                                                     <li>
-                                                        <a href="{{ route('site.detail', ['slugCate' => $category->slug]) }}">
+                                                        <a href="{{ route('site.collection', ['slug' => $category->slug]) }}">
                                                             {{ $category->name }}</a>
                                                     </li>
                                                 @endforeach
@@ -35,9 +35,7 @@
                                 </div>
                             </ul>
                     </li>
-                    <li><a href="{{ route('cart') }}">Giỏ hàng</a></li>
-                    <li><a href="offers.html">Offers</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="{{ route('cart') }}">{{ __('common.cart') }}</a></li>
                 </ul>
             </div>
         </nav>

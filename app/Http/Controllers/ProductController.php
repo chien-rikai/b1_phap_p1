@@ -137,4 +137,9 @@ class ProductController extends Controller
         Session::flash('success', __('message.success_upload', ['model' => __('common.products')]));
         return back();
     }
+
+    public function changeStatus(Product $product)
+    {
+        return $this->productService->changeStatus($product);
+    }
 }

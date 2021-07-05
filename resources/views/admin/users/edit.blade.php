@@ -52,7 +52,7 @@
                                             <div class="form-group">
                                                 <label for="name">{{ __('table.name', ['model' => __('common.user')]) }} {!!'<span class="required-alert">*</span>'!!}</label>
                                                 <input type="text" class="form-control {{ $errors->has('name') ? 'is-invalid' : ''}}"
-                                                    name="name" value="{{ old('name', $user->name) }}" id="name" placeholder="Tên danh mục">
+                                                    name="name" value="{{ old('name', $user->name) }}" id="name">
                                                 @if ($errors->has('name'))
                                                     <span id="exampleInputPassword1-error" class="error invalid-feedback">{{ $errors->first('name') }}</span>
                                                 @endif
@@ -71,6 +71,14 @@
                                             </div>
                                         </div>
 
+                                    </div>
+
+                                    <div class="row">
+                                        {{ loadStatusUserSelected([
+                                            'col' => 6,
+                                            'title' => __('common.status'),
+                                            'name' => 'status'
+                                        ]) }}
                                     </div>
 
                                 </div>
