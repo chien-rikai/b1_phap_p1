@@ -6,7 +6,8 @@ bin-release/
 
 # Other files and folders
 .settings/
-
+/public/storage
+/storage/**
 # Executables
 *.swf
 *.air

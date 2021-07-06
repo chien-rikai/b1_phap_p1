@@ -39,4 +39,12 @@ class UserRepository extends AbstractRepository
 
         return 1;
     }
+
+    public function getUserByEmail($email)
+    {
+        return $this->model->select('email')->firstWhere([
+            ['status', '=', 1],
+            ['email', '=', $email]
+        ]);
+    }
 }

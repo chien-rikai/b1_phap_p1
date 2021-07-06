@@ -24,6 +24,15 @@ function loadCategoriesSelected($params)
     ]);
 }
 
+function loadStatusUserSelected($params)
+{
+    return view('admin.helpers.selected.status_user')->with([
+        'title' => $params['title'] ?? '',
+        'name' => $params['name'] ?? '',
+        'col' => $params['col'] ?? 4
+    ]);
+}
+
 function loadContentHeader($params)
 {
     return view('layouts.content.header')->with([
@@ -51,6 +60,16 @@ function loadFormForCart(Product $product)
     ]);
 }
 
+function flash_params($params)
+{
+    $flash = [];
+    foreach ($params as $key => $value) {
+        $flash[] = $key;
+    }
+
+    return $flash;
+}
+
 function getListCategories()
 {
     $category = new Category;
@@ -66,7 +85,11 @@ function formatCurrencyFrontEnd($str)
 
 function formatCurrencyBackEnd($str)
 {
-    $str = preg_replace("/([^0-9\\,-])/i", "", $str);;
+    if (is_null($str)) {
+        return 0;
+    }
+
+    $str = preg_replace("/([^0-9\\,-])/i", "", $str);
     return $str;
 }
 

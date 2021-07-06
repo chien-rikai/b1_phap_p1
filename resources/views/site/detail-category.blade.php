@@ -16,7 +16,7 @@
                     <ul class="cate">
                         @foreach (getListCategories() as $category)
                             <li>
-                                <a href="{{ route('site.detail', ['slugCate' => $category->slug]) }}"><i class="fa fa-arrow-right" aria-hidden="true"></i>{{ $category->name }}</a>
+                                <a href="{{ route('site.collection', ['slug' => $category->slug]) }}"><i class="fa fa-arrow-right" aria-hidden="true"></i>{{ $category->name }}</a>
                             </li>
                         @endforeach
                     </ul>
@@ -26,22 +26,28 @@
         <div class="col-md-8 products-right">
             <div class="products-right-grid">
                 <div class="products-right-grids">
-                    <div class="sorting">
-                        <select id="country" onchange="change_country(this.value)" class="frm-field required sect">
-                            <option value="null">Default sorting</option>
-                            <option value="null">Sort by popularity</option>
-                            <option value="null">Sort by average rating</option>
-                            <option value="null">Sort by price</option>
-                        </select>
+                    <div class="row">
+                        <form action="{{ route('site.collection', ['slug' => $category->slug]) }}" method="GET">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="exampleFormControlSelect1">{{ __('common.order_by') }} :</label>
+                                    <select class="form-control" id="exampleFormControlSelect1" name="order">
+                                            <option value="">{{ __('common.default') }}</option>
+                                        @foreach (config('global.search') as $key => $item)
+                                            <option value="{{ $key }}">{{ $item }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary">{{ __('common.order') }}</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
-                    <div class="sorting-left">
-                        <select id="country1" onchange="change_country(this.value)" class="frm-field required sect">
-                            <option value="null">Item on page 9</option>
-                            <option value="null">Item on page 18</option>
-                            <option value="null">Item on page 32</option>
-                            <option value="null">All</option>
-                        </select>
-                    </div>
+                    
                     <div class="clearfix"> </div>
                 </div>
             </div>

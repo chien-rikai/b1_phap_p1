@@ -21,6 +21,8 @@ return [
     'update' => 'Cập nhật',
     'destroy' => 'Xóa',
     'login' => 'Đăng nhập',
+    'logout' => 'Đăng xuất',
+    'register' => 'Đăng kí',
     'send' => 'Gửi',
     'manager_user' => 'Quản lý người dùng',
     'manager_general' => 'Quản lý chung',
@@ -63,5 +65,15 @@ return [
     'phone' => 'Số điện thoại',
     'email' => 'Địa chỉ Email',
     'name_custom' => 'Tên khách hàng',
-    'no_cart' => 'Không có sản phẩm nào trong giỏ hàng !'
+    'no_cart' => 'Không có sản phẩm nào trong giỏ hàng !',
+
+    'active' => 'Hoạt động',
+    'block' => 'Khóa',
+    'status' => 'Trạng thái',
+    'asc' => 'Tăng dần',
+    'desc' => 'Giảm dần',
+    'default' => 'Mặc định',
+    'order_by' => 'Sắp xếp theo',
+    'order' => 'Sắp xếp',
+    'history_order' => 'Lịch sử đơn hàng'
 ];

@@ -25,7 +25,7 @@ class ValidateUpdation extends FormRequest
     public function rules()
     {
         $rules = [
-            'name' => ['required', 'max:100', 'unique:products,id,name'],
+            'name' => ['required', 'max:100'],
             'price' => ['required', 'regex:/^[0-9\.]+$/'],
             'price_promotion' => ['nullable', 'regex:/^[0-9\.]+$/'],
             'stock' => ['regex:/^[0-9]+$/'],
@@ -43,7 +43,6 @@ class ValidateUpdation extends FormRequest
         $messages = [
             'name.required' => __('validation.required', ['attr' => __('common.product')]),
             'name.max' => __('validation.max', ['attr' => __('common.product'), 'max' => '100']),
-            'name.unique' => __('validation.unique', ['attr' => __('common.product')]),
 
             'price.required' => __('validation.required', ['attr' => __('common.price')]),
             'price.regex' => __('validation.regex', ['attr' => __('common.price')]),

@@ -17,4 +17,14 @@ class DetailOrder extends Model
         'price_promotion',
         'amount',
     ];
+
+    /**
+     * Get the user that owns the DetailOrder
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function product()
+    {
+        return $this->belongsTo(Product::class, 'product_id', 'id');
+    }
 }

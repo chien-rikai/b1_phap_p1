@@ -26,6 +26,7 @@ class ValidateUpdation extends FormRequest
     {
         $rules = [
             'name' => ['required', 'max:100'],
+            'status' => ['required']
         ];
 
         if (!empty(Request::all('url_image'))) {
@@ -40,6 +41,8 @@ class ValidateUpdation extends FormRequest
         $messages = [
             'name.required' => __('validation.required', ['attr' => __('common.user')]),
             'name.max' => __('validation.max', ['attr' => __('common.user'), 'max' => '100']),
+            
+            'status.required' => __('validation.required', ['attr' => __('common.status')]),
         ];
 
         if (!empty(Request::all('url_image'))) {

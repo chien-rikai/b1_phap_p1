@@ -12,5 +12,5 @@
     <p class="lead">
         <a class="btn btn-primary btn-sm" href="{{ route('site.home') }}" role="button">{{ __('common.home') }}</a>
     </p>
-  </div>
+</div>
 @endsection
