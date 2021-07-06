@@ -37,8 +37,8 @@ class ProductImport implements
                 'name' => $row['name'],
                 'slug' => Str::slug($row['name']).time(),
                 'description' => $row['description'],
-                'price' => $row['price'],
-                'price_promotion' => $row['price_promotion'],
+                'price' => formatCurrencyBackEnd($row['price']),
+                'price_promotion' => formatCurrencyBackEnd($row['price_promotion']),
                 'stock' => $row['stock'],
                 'category_id' => $row['category_id'],
             ]);
@@ -49,8 +49,8 @@ class ProductImport implements
     {
         $rules = [
             '*.name' => ['required', 'max:100', 'unique:products,name'],
-            '*.price' => ['required', 'regex:/^[0-9\.]+$/'],
-            '*.price_promotion' => ['nullable', 'regex:/^[0-9\.]+$/'],
+            '*.price' => ['required', 'regex:/^[0-9\.\,]+$/'],
+            '*.price_promotion' => ['nullable', 'regex:/^[0-9\.\,]+$/'],
             '*.stock' => ['regex:/^[0-9]+$/'],
             '*.category_id' => ['required'],
         ];

@@ -38,10 +38,9 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => $request->password
         ];
-
+        
         if (Auth::attempt($auth)) {
             session_start();
-            $_SESSION["ADMIN"]='ADMIN';
             return redirect()->route('categories.index');
         }
 

@@ -76,6 +76,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     @include('site.layouts.footer')
     <!-- //footer -->
 
+    <!-- // messenger -->
+    @include('site.layouts.messenger')
+    <!--// end-messenger -->
     <!-- Bootstrap Core JavaScript -->
     <script src="{{ asset('site/js/bootstrap.min.js') }}"></script>
 

@@ -25,8 +25,8 @@ class ValidateCreation extends FormRequest
     {
         $rules = [
             'name' => ['required', 'max:100', 'unique:products,name'],
-            'price' => ['required', 'regex:/^[0-9\.]+$/'],
-            'price_promotion' => ['nullable', 'regex:/^[0-9\.]+$/'],
+            'price' => ['required', 'regex:/^[0-9\.\,]+$/'],
+            'price_promotion' => ['nullable', 'regex:/^[0-9\.\,]+$/'],
             'stock' => ['regex:/^[0-9]+$/'],
             'url_image' => ['required', 'image'],
         ];

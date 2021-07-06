@@ -46,19 +46,40 @@ Route::prefix('admin')->group(function () {
         Route::resource('products', ProductController::class);
         Route::resource('categories', CategoryController::class);
         Route::resource('users', UserController::class);
+        Route::resource('orders', OrderController::class)->only(['index', 'show', 'destroy']);
     });
 });
 
 Route::prefix('/')->group(function () {
+    Route::group(['middleware' => 'has.auth.site'], function () {
+        Route::get('/register', [SiteController::class, 'register'])->name('site.register');
+        Route::post('/register', [SiteController::class, 'postRegister'])->name('site.post.register');
+        Route::get('/login', [SiteController::class, 'login'])->name('site.login');
+        Route::post('/login', [SiteController::class, 'postLogin'])->name('site.post.login');
+        
+    });
+
+    Route::get('/logout', [SiteController::class, 'logout'])->name('site.logout');
+
+    Route::group(['middleware' => 'login.site'], function () {
+        Route::get('/member/{member}/history', [SiteController::class, 'history'])->name('site.member.history');
+        Route::get('/order/{order}', [SiteController::class, 'order'])->name('site.order');
+        Route::get('/member/{member}/profile', [SiteController::class, 'profile'])->name('site.member.profile');
+        Route::put('/update/{member}/profile', [SiteController::class, 'updateProfile'])->name('site.update.profile');
+    });
+
     Route::get('/', [SiteController::class, 'home'])->name('site.home');
     Route::get('/cart', [SiteController::class, 'cart'])->name('cart');
     Route::get('/payment', [SiteController::class, 'payment'])->name('payment');
     Route::post('/do-payment', [SiteController::class, 'doPayment'])->name('do.payment');
-    Route::get('/payment/success', [SiteController::class, 'success'])->name('payment.success');
-    Route::get('/{slugCate}/{slug?}', [SiteController::class, 'detail'])->name('site.detail');
+    Route::get('/payment/success', [SiteController::class, 'paymentSuccess'])->name('site.payment.success');
+    Route::get('/collection/{slug?}', [SiteController::class, 'collection'])->name('site.collection');
+    Route::get('/product/{slug}', [SiteController::class, 'product'])->name('site.product');
+    Route::get('/search', [SiteController::class, 'search'])->name('site.search');
 });
 
 Route::prefix('/ajax')->group(function () {
+    Route::post('order-status-update', [OrderController::class, 'updateStatus'])->name('order.status.update');
     Route::post('/rating', [SiteController::class, 'rating'])->name('rating');
     Route::post('/add-to-cart', [SiteController::class, 'addToCart'])->name('add.to.cart');
     Route::post('/update-cart', [SiteController::class, 'updateCart'])->name('update.cart');
