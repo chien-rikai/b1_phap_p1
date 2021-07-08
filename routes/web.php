@@ -8,6 +8,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ExportController;
 use App\Http\Controllers\SiteController;
+use App\Http\Controllers\SocialController;
+
 
 
 /*
@@ -25,11 +27,18 @@ use App\Http\Controllers\SiteController;
 Route::get('/locale/{locale}', [SettingController::class, 'locale'])->name('setting.locale');
 
 Route::prefix('admin')->group(function () {
-    Route::get('/login', [AuthController::class, 'login'])->name('login');
-    Route::post('/login', [AuthController::class, 'postLogin'])->name('post.login');
-    Route::get('/falied', [AuthController::class, 'getFalied'])->name('get.falied');
+    Route::group(['middleware' => 'has.auth'], function () {
+        Route::get('/login', [AuthController::class, 'login'])->name('login');
+        Route::post('/login', [AuthController::class, 'postLogin'])->name('post.login');
+        Route::get('/falied', [AuthController::class, 'getFalied'])->name('get.falied');
+        
+        Route::group(['middleware' => 'verify.provider'], function () {
+            Route::get('/auth/redirect/{provider}', [SocialController::class, 'redirect'])->name('auth.social.redirect');
+            Route::get('/auth/callback/{provider}', [SocialController::class, 'callback'])->name('auth.social.callback');
+        });
+    });
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
-
+    
     Route::get('/forgot-password', [AuthController::class, 'forgotPassword'])->name('forgot.password');
     Route::get('verify-code', [AuthController::class, 'verifyCode'])->name('verify.code');
     Route::get('reset-password', [AuthController::class, 'resetPassword'])->name('reset.password');

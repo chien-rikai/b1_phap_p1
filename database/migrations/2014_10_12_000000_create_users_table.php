@@ -20,6 +20,8 @@ class CreateUsersTable extends Migration
             $table->string('url_image')->nullable();
             $table->tinyInteger('status')->default(1);
             $table->string('role')->default('member');
+            $table->string('google_id')->nullable();
+            $table->string('facebook_id')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

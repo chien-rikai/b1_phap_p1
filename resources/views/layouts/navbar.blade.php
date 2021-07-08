@@ -8,9 +8,7 @@
             <a href="index3.html" class="nav-link">{{ __('common.home') }}</a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            @if (Auth::check())
-                <a href="{{ route('logout') }}" class="nav-link">{{ __('common.logout') }}</a>
-            @endif
+            <a href="{{ route('logout') }}" class="nav-link">{{ __('common.logout') }}</a>
         </li>
     </ul>
 

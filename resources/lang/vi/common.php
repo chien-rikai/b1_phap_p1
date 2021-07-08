@@ -75,5 +75,7 @@ return [
     'default' => 'Mặc định',
     'order_by' => 'Sắp xếp theo',
     'order' => 'Sắp xếp',
-    'history_order' => 'Lịch sử đơn hàng'
+    'history_order' => 'Lịch sử đơn hàng',
+    'facebook_login' => 'Đăng nhập qua Facebook',
+    'google_login' => 'Đăng nhập qua Google'
 ];

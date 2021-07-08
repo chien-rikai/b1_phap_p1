@@ -66,5 +66,6 @@ class Kernel extends HttpKernel
         'login.site' => \App\Http\Middleware\CheckLoginSite::class,
         'has.auth' => \App\Http\Middleware\HasAuth::class,
         'has.auth.site' => \App\Http\Middleware\HasAuthSite::class,
+        'verify.provider' => \App\Http\Middleware\VerifyProvider::class,
     ];
 }
