@@ -42,6 +42,6 @@ class EmailAllow implements Rule
      */
     public function message()
     {
-        return 'Địa chỉ Email không đúng định dạng cho phép';
+        return __('validation.email');
     }
 }
