@@ -13,7 +13,7 @@
 
             <div class="col-md-4 agileinfo_single_left">
                 <div class="agile_top_brand_left_grid_pos">
-                    @if ($product->price_promotion === 0)
+                    @if ($product->price_promotion > 0)
                         <img src="{{ asset('site/images/offer.png') }}" alt=" " class="img-responsive">
                     @endif
                 </div>
@@ -25,7 +25,7 @@
                 <div class="rating1">
                     <span class="starRating">
                         @for ($i = 5; $i > 0; $i--)
-                            <input id="rating{{ $i }}" class="rating" type="radio" name="rating" value="{{ $i }}"
+                            <input id="rating{{ $i }}" class="{{ Auth::guard('site')->check() ? 'rating' : 'auth-rating' }}" type="radio" name="rating" value="{{ $i }}"
                                 {{ ($product->star_rating === $i) ? 'checked' : '' }}>
                             <label for="rating{{ $i }}">{{ $i }}</label>
                         @endfor
@@ -50,7 +50,7 @@
                 <div class="snipcart-item block">
                     <div class="snipcart-thumb agileinfo_single_right_snipcart">
 
-                        {!! ($product->price_promotion === 0) ? '<h4 class=m-sing>'.formatCurrencyFrontEnd($product->price_promotion).' vnđ<span>'.formatCurrencyFrontEnd($product->price).' vnđ</span></h4>' : '<h4 class=m-sing>'.formatCurrencyFrontEnd($product->price).' vnđ</h4>' !!}
+                        {!! ($product->price_promotion > 0) ? '<h4 class=m-sing>'.formatCurrencyFrontEnd($product->price_promotion).' vnđ<span>'.formatCurrencyFrontEnd($product->price).' vnđ</span></h4>' : '<h4 class=m-sing>'.formatCurrencyFrontEnd($product->price).' vnđ</h4>' !!}
 
                     </div>
                     <div class="snipcart-details agileinfo_single_right_details">

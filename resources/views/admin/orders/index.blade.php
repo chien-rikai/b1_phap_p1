@@ -1,7 +1,10 @@
 @extends('layouts.master')
 
 @section('title')
-Quản lý đơn hàng | Danh sách
+{{ __('common.title', [
+    'model' => __('common.order'),
+    'module' => __('common.index')
+]) }}
 @endsection
 
 @section('boostrap')
@@ -11,21 +14,7 @@ Quản lý đơn hàng | Danh sách
 @section('content')
 
 <div class="card">
-    <section class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1>Danh sách</h1>
-                </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
-                        <li class="breadcrumb-item active">Danh sách</li>
-                    </ol>
-                </div>
-            </div>
-        </div><!-- /.container-fluid -->
-    </section>
+    {{ loadContentHeader(['action' => __('common.index'), 'home' => __('common.home')]) }}
 
     <!-- Main content -->
     <section class="content">
@@ -37,62 +26,16 @@ Quản lý đơn hàng | Danh sách
                         <div class="card-header">
                             <div class="row">
                                 <div class="col-sm-12 col-md-6">
-                                    <h3 class="card-title">Tìm kiếm</h3>
+                                    <h3 class="card-title">
+                                        {{ __('common.search') }}
+                                    </h3>
                                 </div>
                             </div>
 
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <form action="{{ route('orders.index') }}" method="GET">
-                                <div class="card-body">
-                                    <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                                        <div class="row">
-                                            <div class="col-4">
-                                                <div class="form-group">
-                                                    <label for="name">Tên khách hàng </label>
-                                                    <input type="text" class="form-control {{ $errors->has('name') ? 'is-invalid' : ''}}"
-                                                        name="name" value="{{ old('name') }}" id="name">
-                                                   
-                                                </div>
-                                            </div>
-                                            <div class="col-4">
-                                                <div class="form-group">
-                                                    <label for="name">Email </label>
-                                                    <input type="text" class="form-control {{ $errors->has('name') ? 'is-invalid' : ''}}"
-                                                        name="email" value="{{ old('email') }}" id="name" >
-                                                </div>
-                                            </div>
-                                            <div class="col-4">
-                                                <div class="form-group">
-                                                    <label for="name">Số điện thoại </label>
-                                                    <input type="text" class="form-control {{ $errors->has('name') ? 'is-invalid' : ''}}"
-                                                        name="phone" value="{{ old('phone') }}" id="name">
-                                                    @if ($errors->has('phone'))
-                                                        <span id="exampleInputPassword1-error" class="error invalid-feedback">{{ $errors->first('name') }}</span>
-                                                    @endif
-                                                </div>
-                                            </div>
-                                        </div>
-                                        
-                                        <div class="row">
-                                            <div class="col-4">
-                                                <label for="name">Trạng thái đơn hàng </label>
-                                                <select class="custom-select" name="status">
-                                                    <option selected value="">Mặc định</option>
-                                                    @foreach (config('constraint.order_status') as $item)
-                                                        <option value="{{ $item['value'] }}" {{ ($item['value'] == old('status')) ? 'selected' : '' }}>{{ $item['name'] }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-    
-                                <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary">Tìm kiếm</button>
-                                </div>
-                            </form>
+                            @include('layouts.form.orders.search')
                         </div>
                         <!-- /.card-body -->
                     </div>
@@ -108,7 +51,9 @@ Quản lý đơn hàng | Danh sách
                         <div class="card-header">
                             <div class="row">
                                 <div class="col-sm-12 col-md-6">
-                                    <h3 class="card-title">Danh sách sản phẩm</h3>
+                                    <h3 class="card-title"> 
+                                        {{ __('common.orders') }}
+                                    </h3>
                                 </div>
                             </div>
 
@@ -137,27 +82,31 @@ Quản lý đơn hàng | Danh sách
                                                     </th>
                                                     <th class="" tabindex="0" aria-controls="example1"
                                                         rowspan="1" colspan="1">
-                                                        Tên khách hàng
+                                                        {{ __('table.name_customer') }}
                                                     </th>
                                                     <th class="" tabindex="0" aria-controls="example1"
                                                         rowspan="1" colspan="1">
-                                                        Email
+                                                        {{ __('table.email') }}
                                                     </th>
                                                     <th class="" tabindex="0" aria-controls="example1"
                                                         rowspan="1" colspan="1">
-                                                        SĐT
+                                                        {{ __('table.phone') }}
                                                     </th>
                                                     <th class="" tabindex="0" aria-controls="example1"
                                                         rowspan="1" colspan="1">
-                                                        Địa chỉ
+                                                        {{ __('table.address') }}
                                                     </th>
                                                     <th class="" tabindex="0" aria-controls="example1"
                                                         rowspan="1" colspan="1">
-                                                        Trạng thái
+                                                        {{ __('table.more_info') }}
                                                     </th>
                                                     <th class="" tabindex="0" aria-controls="example1"
                                                         rowspan="1" colspan="1">
-                                                        Thao tác
+                                                        {{ __('table.status') }}
+                                                    </th>
+                                                    <th class="" tabindex="0" aria-controls="example1"
+                                                        rowspan="1" colspan="1">
+                                                        {{ __('table.action') }}
                                                     </th>
                                                 </tr>
                                             </thead>
@@ -171,33 +120,36 @@ Quản lý đơn hàng | Danh sách
                                                             <td>{{ $order->phone }}</td>
                                                             <td>{{ $order->address }}</td>
                                                             <td>
-                                                                <select name="status" class="order-status" data-order-id="{{ $order->id }}">
-                                                                    @foreach (config('constraint.order_status') as $item)
-                                                                        <option value="{{ $item['value'] }}" {{ ($item['value'] == $order->status) ? 'selected' : '' }}>{{ $item['name'] }}</option>
-                                                                    @endforeach
-                                                                </select>
+                                                                <b>- {{ __('common.date_order') }} :</b> {{ fortmatDateFrontend($order->created_at) }} <br>
+                                                                <b>- {{ __('common.date_order_end') }} :</b> {{ fortmatDateFrontend($order->date_order_end) }} <br>
+                                                                <b>- {{ __('common.date_take_money') }} :</b> {{ fortmatDateFrontend($order->date_take_money) }} <br>
+                                                            </td>               
+                                                            <td>
+                                                                {{ __('common.'.config('global.status_order.'.$order->status)) }}
                                                             </td>
                                                             <td>
                                                                 <a href="{{route('orders.show', $order->id)}}"
                                                                     class="btn btn-info btn-sm float-left mr-1">
-                                                                    Xem chi tiết
+                                                                    {{ __('common.detail_order') }}
                                                                 </a>
 
-                                                                <form action="{{route('orders.destroy',$order->id)}}"
-                                                                    class="pull-left float-left"
-                                                                    method="POST">
-                                                                    @csrf
-                                                                    @method('DELETE')
-                                                                    <button type="submit" class="btn btn-sm btn-danger btn-icon btn-delete">
-                                                                        Hủy đơn hàng
-                                                                    </button>
-                                                                </form>
+                                                                @if ($order->status == 0)
+                                                                    <form action="{{route('orders.destroy',$order->id)}}"
+                                                                        class="pull-left float-left"
+                                                                        method="POST">
+                                                                        @csrf
+                                                                        @method('DELETE')
+                                                                        <button type="submit" class="btn btn-sm btn-danger btn-icon btn-delete">
+                                                                            {{ __('common.order_delete') }}
+                                                                        </button>
+                                                                    </form>
+                                                                @endif
                                                             </td>
                                                         </tr>
                                                     @endforeach
                                                 @else
                                                     <tr>
-                                                        <td colspan="6">Không có dữ liệu hiển thị</td>
+                                                        <td colspan="9">{{ __('table.no_data') }}</td>
                                                     </tr>
                                                 @endif
                                             </tbody>
@@ -207,7 +159,7 @@ Quản lý đơn hàng | Danh sách
                                 <div class="row">
                                     <div class="col-sm-12 col-md-5">
                                         <div class="dataTables_info" id="example1_info" role="status"
-                                            aria-live="polite">Hiện có {{ $orders->total() }} mục</div>
+                                            aria-live="polite">{{ __('pagination.total', ['total' => $orders->total()]) }}</div>
                                     </div>
                                     <div class="col-sm-12 col-md-7">
                                         <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
@@ -229,45 +181,4 @@ Quản lý đơn hàng | Danh sách
     </section>
 </div>
 
-@endsection
-
-@section('script')
-<script>
-    $('.order-status').on('change', function () {
-        var Toast = Swal.mixin({
-                    toast: true,
-                    position: 'top-end',
-                    showConfirmButton: false,
-                    timer: 3000
-                });
-
-        $.ajax({
-            headers: {
-                'X-CSRF-TOKEN': "{{ csrf_token() }}",
-            },
-            type: 'POST',
-            data: {
-                id: $(this).data('order-id'),
-                status: $(this).val()
-            },
-            dataType: 'json',
-            cache: false,
-            url: "{{ route('order.status.update') }}",
-            success: function (res) {
-               if (res == 1) {
-                Toast.fire({
-                    icon: 'success',
-                    title: "Cập nhật trạng thái thành công !",
-                }).show();
-               }
-            },
-            error: function (error) {
-                Toast.fire({
-                    icon: 'error',
-                    title: "Có lỗi phát sinh. Vui lòng thử lại !",
-                }).show();
-            }
-        });
-    });
-</script>
 @endsection

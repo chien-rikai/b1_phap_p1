@@ -15,8 +15,8 @@ class ProductService
 {
     use ImageResize;
 
-    protected $productRepo;
-    protected $categoryRepo;
+    public $productRepo;
+    public $categoryRepo;
     
     public function __construct(ProductRepository $productRepo,
                                 CategoryRepository $categoryRepo)
@@ -28,6 +28,34 @@ class ProductService
     public function getCategories()
     {
         return $this->categoryRepo->getLists();
+    }
+
+    private function upload($image, $filename)
+    {
+        try {
+            $this->uploadImage($image, $filename, 'projects/avatar', [
+                'sizeX' => 100, 
+                'sizeY' => 100, 
+                'status' => 1, 
+                'quality' => 100
+            ]);
+            $this->uploadImage($image, $filename, 'projects/display', [
+                'sizeX' => 150, 
+                'sizeY' => 150, 
+                'status' => 1, 
+                'quality' => 100
+            ]);
+            $this->uploadImage($image, $filename, 'projects/detail', [
+                'sizeX' => 300, 
+                'sizeY' => 300, 
+                'status' => 1, 
+                'quality' => 100
+            ]);
+    
+            return null;
+        } catch (Exception $e) {
+            return $e;
+        } 
     }
 
     public function index(Request $request)
@@ -51,31 +79,10 @@ class ProductService
             'category_id' => $request->category_id,
         ];
 
-        if (isset($params['url_image'])) {
-            $filename = $params['slug'] . time() . '.' . $params['url_image']->getClientOriginalExtension();
-
-            $imageAvatar = $this->uploadImage($params['url_image'], $filename, 'projects/avatar', [
-                'sizeX' => 100, 
-                'sizeY' => 100, 
-                'status' => 1, 
-                'quality' => 100
-            ]);
-            $imageDisplay = $this->uploadImage($params['url_image'], $filename, 'projects/display', [
-                'sizeX' => 150, 
-                'sizeY' => 150, 
-                'status' => 1, 
-                'quality' => 100
-            ]);
-            $imageDetail = $this->uploadImage($params['url_image'], $filename, 'projects/detail', [
-                'sizeX' => 300, 
-                'sizeY' => 300, 
-                'status' => 1, 
-                'quality' => 100
-            ]);
-            
-            if (isset($imageAvatar) && isset($imageDisplay) && isset($imageDetail)) {
-                $params['url_image'] = $filename;
-            }
+        $filename = $params['slug'] . time() . '.' . $request->url_image->getClientOriginalExtension();
+        
+        if (is_null(self::upload($request->url_image, $filename))) {
+            $params['url_image'] = $filename;
         }
 
         $product = $this->productRepo->create($params);
@@ -94,7 +101,6 @@ class ProductService
         $params = [
             'name' => $request->name,
             'slug' => Str::slug($request->name).time(),
-            'url_image' => $request->file('url_image'),
             'description' => $request->description,
             'price' => formatCurrencyBackEnd($request->price),
             'price_promotion' => formatCurrencyBackEnd($request->price_promotion),
@@ -102,39 +108,22 @@ class ProductService
             'category_id' => $request->category_id,
         ];
 
-        if (isset($params['url_image'])) {
-            $filename = $params['slug'] . time() . '.' . $params['url_image']->getClientOriginalExtension();
+        $request->whenHas('url_image', function ($image) use (&$params, $product) {
+            $filename = $params['slug'] . time() . '.' . $image->getClientOriginalExtension();
 
-            $imageAvatar = $this->uploadImage($params['url_image'], $filename, 'projects/avatar', [
-                'sizeX' => 100, 
-                'sizeY' => 100, 
-                'status' => 1, 
-                'quality' => 100
-            ]);
-            $imageDisplay = $this->uploadImage($params['url_image'], $filename, 'projects/display', [
-                'sizeX' => 150, 
-                'sizeY' => 150, 
-                'status' => 1, 
-                'quality' => 100
-            ]);
-            $imageDetail = $this->uploadImage($params['url_image'], $filename, 'projects/detail', [
-                'sizeX' => 300, 
-                'sizeY' => 300, 
-                'status' => 1, 
-                'quality' => 100
-            ]);
-            
-            if (isset($imageAvatar) && isset($imageDisplay) && isset($imageDetail)) {
+            if (is_null(self::upload($image, $filename))) {
                 $delImage = [
                     storage_path('app/public/projects/avatar/' . $product->url_image),
                     storage_path('app/public/projects/display/' . $product->url_image),
                     storage_path('app/public/projects/detail/' . $product->url_image),
                 ];
-
+    
                 File::delete($delImage);
                 $params['url_image'] = $filename;
             }
-        }
+
+            return;
+        });
 
         $updation = $product->update($params);
 
@@ -166,5 +155,14 @@ class ProductService
         }
 
         return;
+    }
+
+    public function changeStatus(Product $product)
+    {
+        if (blank($product)) {
+            return 0;
+        }
+
+        return $product->update(['display' => !$product->display]);
     }
 }

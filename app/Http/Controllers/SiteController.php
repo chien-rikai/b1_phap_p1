@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Repositories\ProductRepository;
 use App\Repositories\MemberRepository;
+use App\Repositories\OrderRepository;
 use App\Http\Requests\Site\ValidatePayment;
 use App\Http\Requests\Site\ValidateRegister;
 use App\Http\Requests\Auth\ValidateLogin;
@@ -12,6 +13,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Services\SiteService;
 use App\Models\Member;
+use App\Models\Order;
 use Session;
 
 class SiteController extends Controller
@@ -19,20 +21,23 @@ class SiteController extends Controller
     protected $productRepo;
     protected $siteService;
     protected $memberRepo;
+    protected $orderRepo;
 
     public function __construct(ProductRepository $productRepo,
                                 SiteService $siteService,
-                                MemberRepository $memberRepo)
+                                MemberRepository $memberRepo,
+                                OrderRepository $orderRepo)
     {
         $this->productRepo = $productRepo;
         $this->siteService = $siteService;
         $this->memberRepo = $memberRepo;
+        $this->orderRepo = $orderRepo;
     }
 
     public function home()
     {
         return view('site.home')->with([
-            'products' => $this->productRepo->getListDESC(6),
+            'products' => $this->productRepo->getNewProduct(6),
             'hotProducts' => $this->productRepo->getHotProducts(),
             'saleProducts' => $this->productRepo->getSaleProducts()
         ]);
@@ -45,7 +50,7 @@ class SiteController extends Controller
         }
 
         return view('site.search')->with([
-            'products' => $this->productRepo->searchOnSite($request->name),
+            'products' => $this->siteService->search($request->name),
         ]);
     }
 
@@ -101,9 +106,24 @@ class SiteController extends Controller
 
     public function doPayment(ValidatePayment $request)
     {
-        if ($this->siteService->doPayment($request) != null) {
-            return back();
-        }
+        // Lưu thông tin người mua vào Session('customer')
+        $this->siteService->doPayment($request);
+
+        return redirect()->route('confirm.payment');
+    }
+
+    public function confirmPayment()
+    {
+        return view('site.confirm-payment')->with([
+            'customer' => Session::get('customer'),
+            'products' => Session::get('cart'),
+            'total' => 0
+        ]);
+    }
+
+    public function confirm()
+    {
+        $this->siteService->confirm();
 
         return redirect()->route('site.payment.success');
     }
@@ -158,24 +178,28 @@ class SiteController extends Controller
         return redirect()->route('site.login');
     }
 
-    public function history(Member $member)
+    public function history(Member $member, Request $request)
     {
         if (blank($member)) {
-            abort(404);
+            Session::flash('error', __('message.not_found'));
+            return redirect()->route('members.index');
         }
-        
-        $orders = $member->orders()->orderBy('created_at', 'DESC')->paginate(10);
 
-        return view('site.members.history', compact(['member', 'orders']));
+        $request->flashOnly(flash_params($request->all()));
+        
+        return view('site.members.history')->with([
+            'orders' => $this->orderRepo->searchForMember($member->id, $request->all()),
+            'member' => $member,
+        ]);
     }
 
     public function order(Order $order)
     {
-        if (blank($order)) {
-            abort(404);
-        }
-
-        return view('site.members.order', compact('order'));
+        return view('site.members.order')->with([
+            'order' => $order,
+            'detailOrders' => $order->detail_orders()->get(),
+            'totalPayment' => 0
+        ]);
     }
 
     public function profile(Member $member)

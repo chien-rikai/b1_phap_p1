@@ -1,25 +1,41 @@
 @extends('site.members.layouts.master')
 
+@section('title')
+    {{ __('common.title', [
+        'model' => __('common.member'),
+        'module' => $member->name
+    ]) }}
+@endsection
+
+
 @section('content')
+
 <div class="card">
-    <section class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1></h1>
-                </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                       
-                    </ol>
-                </div>
-            </div>
-        </div><!-- /.container-fluid -->
-    </section>
+    {{ loadContentHeader(['action' => __('common.index'), 'home' => __('common.home')]) }}
 
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="col-sm-12 col-md-6">
+                                <h3 class="card-title">
+                                    {{ __('common.search') }}
+                                </h3>
+                            </div>
+                        </div>
+
+                        <div class="card-body">
+                            <div id="example1_wrapper" class="dataTables_wrapper dt-bootstrap4">      
+                                @include('layouts.form.orders.search_for_member')
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="row">
                 <div class="col-12">
                     <!-- /.card -->
@@ -27,8 +43,11 @@
                         <div class="card-header">
                             <div class="row">
                                 <div class="col-sm-12 col-md-6">
-                                    <h3 class="card-title">{{ __('common.history_order') }}</h3>
+                                    <h3 class="card-title">
+                                        {{ __('common.order') }}
+                                    </h3>
                                 </div>
+
                             </div>
 
                         </div>
@@ -40,7 +59,6 @@
 
                                     </div>
                                     <div class="col-sm-12 col-md-6">
-                                       
                                     </div>
                                 </div>
                                 <div class="row">
@@ -48,7 +66,79 @@
                                         <table id="example1"
                                             class="table table-bordered table-striped dataTable dtr-inline" role="grid"
                                             aria-describedby="example1_info">
-                                           
+                                            <thead>
+                                                <tr role="row">
+                                                    <th class="" tabindex="0"
+                                                        aria-controls="example1" rowspan="1" colspan="1">
+                                                        #</th>
+                                                    <th class="" tabindex="0" aria-controls="example1"
+                                                        rowspan="1" colspan="1">
+                                                        {{ __('table.email') }}
+                                                    </th>
+                                                    <th class="" tabindex="0" aria-controls="example1"
+                                                        rowspan="1" colspan="1">
+                                                        {{ __('table.phone') }}
+                                                    </th>
+                                                    <th class="" tabindex="0" aria-controls="example1"
+                                                        rowspan="1" colspan="1">
+                                                        {{ __('table.address') }}
+                                                    </th>
+                                                    <th class="" tabindex="0" aria-controls="example1"
+                                                        rowspan="1" colspan="1">
+                                                        {{ __('table.date_order') }}
+                                                    </th>
+                                                    <th class="" tabindex="0" aria-controls="example1"
+                                                        rowspan="1" colspan="1">
+                                                        {{ __('table.date_order_end') }}
+                                                    </th>
+                                                    <th class="" tabindex="0" aria-controls="example1"
+                                                        rowspan="1" colspan="1">
+                                                        {{ __('table.status') }}
+                                                    </th>
+                                                    <th class="" tabindex="0" aria-controls="example1"
+                                                        rowspan="1" colspan="1">
+                                                        {{ __('table.action') }}
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @if (!blank($orders))
+                                                    @foreach ($orders as $key => $order)
+                                                        <tr>
+                                                            <td>{{ ++$key }}</td>
+                                                            <td>{{ $order->email }}</td>
+                                                            <td>{{ $order->phone }}</td>
+                                                            <td>{{ $order->address }}</td>
+                                                            <td>{{ fortmatDateFrontend($order->created_at) }}</td>
+                                                            <td>{{ fortmatDateFrontend($order->created_at) }}</td>
+                                                            <td>{{ __('common.'.config('global.status_order.'.$order->status)) }}</td>
+
+                                                            <td>
+                                                                <a href="{{ route('site.order', $order->id) }}"
+                                                                    class="btn btn-info btn-sm float-left mr-1">
+                                                                    {{ __('common.detail_order') }}
+                                                                </a>
+
+                                                                @if ($order->status == 0)
+                                                                    <form action="{{route('orders.destroy',$order->id)}}"
+                                                                        class="pull-left float-left"
+                                                                        method="POST">
+                                                                        @csrf
+                                                                        @method('DELETE')
+                                                                        <button type="submit" class="btn btn-sm btn-danger btn-icon btn-delete">
+                                                                            {{ __('common.order_delete') }}
+                                                                        </button>
+                                                                    </form>
+                                                                @endif
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                @else
+                                                    <tr>
+                                                        <td colspan="7">{{ __('table.no_data') }}</td>
+                                                    </tr>
+                                                @endif
+                                            </tbody>
                                         </table>
                                     </div>
                                 </div>
@@ -76,4 +166,6 @@
         <!-- /.container-fluid -->
     </section>
 </div>
+
 @endsection
+

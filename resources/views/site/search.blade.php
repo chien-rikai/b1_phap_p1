@@ -1,7 +1,7 @@
 @extends('site.layouts.master')
 
 @section('title')
-    SupperMarket | {{ __('common.category') }}
+    SupperMarket | {{ __('common.search') }}
 @endsection
 
 @section('content')
@@ -39,7 +39,7 @@
                 </div>
             </div>
 
-            @include('site.layouts.list-products', ['split' => 3])
+            @include('site.layouts.search-products')
 
             @if (!blank($products))
                 {!! $products->appends(Request::all())->links('site.helpers.paginate') !!}    

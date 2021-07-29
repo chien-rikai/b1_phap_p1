@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Repositories\OrderRepository;
+use App\Models\Order;
 
 class OrderController extends Controller
 {
@@ -54,13 +55,11 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Order $order)
     {
-        $order = $this->orderRepo->getById($id);
-
         return view('admin.orders.show')->with([
             'order' => $order,
-            'detailOrders' => $order->detail_orders()->paginate(10),
+            'detailOrders' => $order->detail_orders()->get(),
             'totalPayment' => 0
         ]);
     }
@@ -101,10 +100,11 @@ class OrderController extends Controller
         return back();
     }
 
-    public function updateStatus(Request $request) 
+    public function forward($id)
     {
-        $this->orderRepo->update($request->id, ['status' => $request->input('status')]);
-
-        return 1;
+        return response()->json(array('success' => true, 'html' => view('admin.fragments.info_user')->with([
+                'order' => $this->orderRepo->forward($id), 
+            ])->render()
+        ));
     }
 }

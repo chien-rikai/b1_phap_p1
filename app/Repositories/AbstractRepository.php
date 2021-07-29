@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use Carbon\Carbon;
 /**
  *
  * Class AbstractRepository
@@ -86,4 +87,8 @@ abstract class AbstractRepository
         return $this->model->whereIn('id',$params)->get();
     }
 
+    public function countNewToday()
+    {
+        return $this->model->whereDate('created_at', Carbon::now('Asia/Ho_Chi_Minh')->toDateString())->count();
+    }
 }

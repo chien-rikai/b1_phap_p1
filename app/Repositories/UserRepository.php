@@ -47,4 +47,9 @@ class UserRepository extends AbstractRepository
             ['email', '=', $email]
         ]);
     }
+
+    public function getAllEmailAdress()
+    {
+        return $this->model->where('status', 1)->select('email')->get();
+    }
 }

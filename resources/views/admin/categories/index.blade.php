@@ -90,6 +90,10 @@
                                                     </th>
                                                     <th class="" tabindex="0" aria-controls="example1"
                                                         rowspan="1" colspan="1">
+                                                        {{ __('table.status') }}
+                                                    </th>
+                                                    <th class="" tabindex="0" aria-controls="example1"
+                                                        rowspan="1" colspan="1">
                                                         {{ __('table.action') }}
                                                     </th>
                                                 </tr>
@@ -100,6 +104,10 @@
                                                         <tr>
                                                             <td>{{ ++$key }}</td>
                                                             <td>{{ $category->name }}</td>
+                                                            <td>
+                                                                <input type="checkbox" {{ ($category->display) ? 'checked' : '' }} data-toggle="toggle" data-category-id="{{ $category->id }}"
+                                                                    data-size="sm" data-onstyle="info" class="status-display-category">
+                                                            </td>
                                                             <td>
                                                                 <a href="{{route('categories.edit',$category->id)}}"
                                                                     class="btn btn-success btn-sm float-left mr-1">

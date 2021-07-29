@@ -73,14 +73,16 @@
 
                                     </div>
 
-                                    <div class="row">
-                                        {{ loadStatusUserSelected([
-                                            'col' => 6,
-                                            'title' => __('common.status'),
-                                            'name' => 'status'
-                                        ]) }}
-                                    </div>
-
+                                    @if (Auth::user()->role === 'admin')
+                                        <div class="row">
+                                            {{ loadStatusUserSelected([
+                                                'col' => 6,
+                                                'title' => __('common.status'),
+                                                'name' => 'status'
+                                            ]) }}
+                                        </div>
+                                    @endif
+                
                                 </div>
                             </div>
 

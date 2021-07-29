@@ -30,9 +30,9 @@
                         <form action="{{ route('site.collection', ['slug' => $category->slug]) }}" method="GET">
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="exampleFormControlSelect1">{{ __('common.order_by') }} :</label>
+                                    <label for="exampleFormControlSelect1">Sắp xếp theo :</label>
                                     <select class="form-control" id="exampleFormControlSelect1" name="order">
-                                            <option value="">{{ __('common.default') }}</option>
+                                            <option value="">Mặc định</option>
                                         @foreach (config('global.search') as $key => $item)
                                             <option value="{{ $key }}">{{ $item }}</option>
                                         @endforeach
@@ -42,7 +42,7 @@
 
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-primary">{{ __('common.order') }}</button>
+                                    <button type="submit" class="btn btn-primary">Sắp xếp</button>
                                 </div>
                             </div>
                         </form>

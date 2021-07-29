@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
-use App\Repositories\CategoryRepository;
+use App\Services\CategoryService;
 use App\Http\Requests\Category\ValidateCreation as CategoryCreate;
 use App\Http\Requests\Category\ValidateUpdation as CategoryUpdate;
 use Session;
@@ -12,11 +12,11 @@ use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
-    protected $categoryRepo;
+    protected $categoryService;
 
-    public function __construct(CategoryRepository $categoryRepository)
+    public function __construct(CategoryService $categoryService)
     {
-        $this->categoryRepo = $categoryRepository;
+        $this->categoryService = $categoryService;
     }
 
     /**
@@ -26,11 +26,7 @@ class CategoryController extends Controller
      */
     public function index(Request $request)
     {
-        $params = [
-            'name' => $request->input('name'), 
-        ];
-
-        $categories = $this->categoryRepo->search($params);
+        $categories = $this->categoryService->categoryRepo->search($request->all());
 
         return view('admin.categories.index', compact('categories'));
     }
@@ -53,20 +49,9 @@ class CategoryController extends Controller
      */
     public function store(CategoryCreate $request)
     {
-        $params = [
-            'name' => $request->input('name'), 
-            'slug' => Str::slug($request->name)
-        ];
+        $this->categoryService->store($request);
 
-        $category = $this->categoryRepo->create($params);
-
-        if (blank($category)) {
-            Session::flash('error', __('message.error', ['action' => __('common.store'), 'model' => __('common.category')]));
-        } else {
-            Session::flash('success', __('message.success', ['action' => __('common.store'), 'model' => __('common.category')]));
-        }
-
-        return back();
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -86,10 +71,8 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Category $category)
     {
-        $category = $this->categoryRepo->getById($id);
-
         if (blank($category)) {
             Session::flash('error', __('message.not_found'));
             return back();
@@ -107,20 +90,9 @@ class CategoryController extends Controller
      */
     public function update(CategoryUpdate $request, $id)
     {
-        $params = [
-            'name' => $request->input('name'), 
-            'slug' => Str::slug($request->name)
-        ];
+       $this->categoryService->update($request, $id);
 
-        $updation = $this->categoryRepo->update($id, $params);
-
-        if (!$updation) {
-            Session::flash('error', __('message.error', ['action' => __('common.update'), 'model' => __('common.category')]));
-        } else {
-            Session::flash('success', __('message.success', ['action' => __('common.update'), 'model' => __('common.category')]));
-        }
-
-        return back();
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -131,8 +103,34 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $this->categoryRepo->clear($id);
+        $this->categoryService->categoryRepo->clear($id);
 
         return back();
+    }
+
+    public function changeStatus($id)
+    {
+        return $this->categoryService->categoryRepo->changeStatus($id);
+    }
+
+    public function trash()
+    {
+        return view('admin.categories.trash')->with([
+            'categories' => $this->categoryService->categoryRepo->getTrash(),
+        ]);
+    }
+
+    public function restore($id)
+    {
+        $this->categoryService->categoryRepo->restore($id);
+
+        return redirect()->route('categories.trash'); 
+    }
+
+    public function forceDestroy($id)
+    {
+        $this->categoryService->categoryRepo->forceDestroy($id);
+        
+        return redirect()->route('categories.trash');
     }
 }
